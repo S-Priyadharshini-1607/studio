@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
 import Features from './components/Features';
-import SocialProof from './components/SocialProof';
 import VisualSection from './components/VisualSection';
 import Chatbot from './components/Chatbot';
 import Contact from './components/Contact';
@@ -48,7 +47,6 @@ export default function App() {
         <Hero />
         <Portfolio />
         <Features />
-        <SocialProof />
         <VisualSection />
         <Contact />
         <Location />

@@ -1,11 +1,10 @@
 import { motion } from 'motion/react';
-import { Users, Star, Award, TrendingUp } from 'lucide-react';
+import { Users, Award, TrendingUp } from 'lucide-react';
 import { useInView } from './hooks/useInView';
 import { useEffect, useState } from 'react';
 
 const stats = [
   { icon: Users, value: 500, suffix: '+', label: 'Happy Couples' },
-  { icon: Star, value: 5.0, suffix: '/5', label: 'Client Rating' },
   { icon: Award, value: 25, suffix: '+', label: 'Awards Won' },
   { icon: TrendingUp, value: 100, suffix: '%', label: 'Satisfaction Rate' },
 ];
@@ -15,19 +14,16 @@ const testimonials = [
     name: 'Sarah & James',
     role: 'Married June 2025',
     content: 'Our wedding photos are absolutely stunning! Every moment was captured with such beauty and emotion.',
-    rating: 5,
   },
   {
     name: 'Emma & Michael',
     role: 'Married September 2025',
     content: 'Professional, creative, and so easy to work with. Our photos exceeded all expectations!',
-    rating: 5,
   },
   {
     name: 'Lisa & David',
     role: 'Married March 2026',
     content: 'We can\'t stop looking at our wedding album. These photos will be treasured forever!',
-    rating: 5,
   },
 ];
 
@@ -71,7 +67,7 @@ export default function SocialProof() {
     >
       <div className="container mx-auto px-6">
         {/* Stats */}
-        <div className="grid md:grid-cols-4 gap-8 mb-20">
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
@@ -118,15 +114,6 @@ export default function SocialProof() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 shadow-lg"
             >
-              <div className="flex mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="text-yellow-500 fill-yellow-500"
-                    size={20}
-                  />
-                ))}
-              </div>
               <p className="text-gray-700 dark:text-gray-300 mb-6 italic">
                 "{testimonial.content}"
               </p>
