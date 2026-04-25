@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { MapPin, Clock, Navigation } from 'lucide-react';
+import { MapPin, Clock, Phone } from 'lucide-react';
 import { useInView } from './hooks/useInView';
 
 export default function Location() {
@@ -54,50 +54,54 @@ export default function Location() {
             <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg">
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-                  <MapPin className="text-blue-600 dark:text-blue-400" size={24} />
+                  <MapPin className="text-blue-600 dark:text-blue-400" size={24} aria-label="Address" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold mb-2">Address</h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    456 Romance Avenue<br />
-                    San Francisco, CA 94103<br />
-                    United States
+                    1 Floor, Focus Photography, Near GH, Mandhaveli,<br />
+                    Kallakurichi – Kachirapalayam Road,<br />
+                    Kallakurichi-606202, Tamil Nadu
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
-                  <Clock className="text-purple-600 dark:text-purple-400" size={24} />
+                  <Clock className="text-purple-600 dark:text-purple-400" size={24} aria-label="Working Hours" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2">Office Hours</h3>
+                  <h3 className="text-xl font-bold mb-2">Working Hours</h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Monday - Friday: 9:00 AM - 6:00 PM<br />
-                    Saturday: 10:00 AM - 4:00 PM<br />
-                    Sunday: Closed
+                    Sunday to Saturday<br />
+                    9:00 AM to 9:00 PM
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
-                  <Navigation className="text-green-600 dark:text-green-400" size={24} />
+                  <Phone className="text-green-600 dark:text-green-400" size={24} aria-label="Phone" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2">Getting Here</h3>
+                  <h3 className="text-xl font-bold mb-2">Phone</h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Accessible by BART, Muni, and all major bus lines.<br />
-                    Street parking available.<br />
-                    Bike racks at entrance.
+                    <a href="tel:08792740847" className="hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                      08792740847
+                    </a>
                   </p>
                 </div>
               </div>
             </div>
 
-            <button className="w-full py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105">
+            <a 
+              href="https://maps.app.goo.gl/JccXfbTB7QHe6TSP8" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="block text-center w-full py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105"
+            >
               Get Directions
-            </button>
+            </a>
           </motion.div>
         </div>
       </div>
