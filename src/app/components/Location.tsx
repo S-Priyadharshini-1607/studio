@@ -33,7 +33,7 @@ export default function Location() {
             className="rounded-2xl overflow-hidden shadow-2xl h-96"
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0867887403647!2d-122.41941492346698!3d37.77492971141845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050fa5!2sTwitter%20HQ!5e0!3m2!1sen!2sus!4v1682451234567!5m2!1sen!2sus"
+              src="https://maps.google.com/maps?q=1%20Floor%2C%20Focus%20Photography%2C%20Near%20GH%2C%20Mandhaveli%2C%20Kallakurichi%20-%20Kachirapalayam%20Road%2C%20Kallakurichi-606202%2C%20Tamil%20Nadu&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -95,7 +95,7 @@ export default function Location() {
             </div>
 
             <a 
-              href="https://maps.app.goo.gl/JccXfbTB7QHe6TSP8" 
+              href="https://www.google.com/maps/search/?api=1&query=1+Floor%2C+Focus+Photography%2C+Near+GH%2C+Mandhaveli%2C+Kallakurichi+-+Kachirapalayam+Road%2C+Kallakurichi-606202%2C+Tamil+Nadu" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="block text-center w-full py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105"

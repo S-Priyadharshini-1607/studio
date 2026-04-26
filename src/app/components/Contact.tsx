@@ -126,15 +126,15 @@ export default function Contact() {
       </div>
 
       {/* Floating Buttons */}
-      <div className="fixed bottom-10 right-10 z-50 flex flex-col gap-4">
-        <a 
-          href="tel:+911234567890" 
+      <div className="fixed bottom-24 left-10 z-50 flex flex-col gap-4">
+        <a
+          href="tel:+911234567890"
           className="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
         >
           <Phone size={24} />
         </a>
-        <a 
-          href="https://wa.me/911234567890" 
+        <a
+          href="https://wa.me/911234567890"
           className="w-14 h-14 bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
         >
           <MessageSquare size={24} />

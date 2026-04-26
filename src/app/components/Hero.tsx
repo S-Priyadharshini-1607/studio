@@ -3,14 +3,19 @@ import { ArrowRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 
+import image1 from '../../assets/1.jpeg';
+import image2 from '../../assets/2.jpeg';
+import image3 from '../../assets/3.jpeg';
+import image4 from '../../assets/4.jpeg';
+import image5 from '../../assets/5.jpeg';
+
 const BACKGROUND_IMAGES = [
-  "/src/assets/gallery/img3.jpg",
-  "/src/assets/gallery/img4.jpg",
-  "/src/assets/gallery/img5.webp",
-  "/src/assets/gallery/img6.webp"
+  image1,
+  image2,
+  image3,
+  image4,
+  image5,
 ];
-
-
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -18,17 +23,10 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % BACKGROUND_IMAGES.length);
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section
@@ -36,47 +34,51 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background with gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-white">
+      <div className="absolute inset-0 z-0 bg-black">
         <AnimatePresence>
           <motion.div
             key={currentImageIndex}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
             className="absolute inset-0"
           >
             <ImageWithFallback
               src={BACKGROUND_IMAGES[currentImageIndex]}
               alt="Wedding couple"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover brightness-110"
             />
           </motion.div>
         </AnimatePresence>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/10 to-black/20 z-10"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-6 text-center text-white">
-      <div className="relative z-20 container mx-auto px-6 text-center text-white">
-      </div>
-      </div>
-
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2"
-        >
-          <div className="w-1 h-2 bg-white/50 rounded-full"></div>
-        </motion.div>
-      </motion.div>
+          animate={{
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-1/4 left-10 w-16 h-16 bg-white/10 rounded-full blur-xl"
+        />
+        <motion.div
+          animate={{
+            y: [0, 20, 0],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute bottom-1/4 right-10 w-24 h-24 bg-white/10 rounded-full blur-xl"
+        />
+      </div>
     </section>
   );
 }
