@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import About from './components/About';
 import Portfolio from './components/Portfolio';
 import Features from './components/Features';
 import VisualSection from './components/VisualSection';
@@ -45,12 +46,14 @@ export default function App() {
 
       <main>
         <Hero />
+        <About />
         <Portfolio />
         <Features />
         <VisualSection />
         <Contact />
         <Location />
       </main>
+
 
       <Footer />
       <Chatbot />
