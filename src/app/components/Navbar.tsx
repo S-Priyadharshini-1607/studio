@@ -51,7 +51,9 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-2xl font-bold text-rose-600 dark:text-rose-400 min-w-[150px]"
+            className={`text-2xl font-bold transition-colors min-w-[150px] ${
+              isScrolled ? 'text-rose-600' : 'text-white'
+            }`}
           >
             FocusStudio
           </motion.div>
@@ -65,7 +67,11 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
                 onClick={() => scrollToSection(link.id)}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
+                className={`transition-colors font-bold tracking-wider uppercase text-xs ${
+                  isScrolled 
+                    ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600' 
+                    : 'text-white hover:text-blue-200'
+                }`}
               >
                 {link.name}
               </motion.button>
@@ -75,10 +81,15 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
           <div className="hidden md:flex items-center gap-4 min-w-[200px] justify-end">
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className={`p-2 rounded-full transition-colors ${
+                isScrolled 
+                  ? 'hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300' 
+                  : 'hover:bg-white/20 text-white'
+              }`}
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+
             <motion.button
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -95,17 +106,22 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
           <div className="md:hidden flex items-center gap-4">
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className={`p-2 rounded-full transition-colors ${
+                isScrolled 
+                  ? 'hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300' 
+                  : 'text-white hover:bg-white/10'
+              }`}
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2"
+              className={`p-2 transition-colors ${isScrolled ? 'text-gray-900 dark:text-white' : 'text-white'}`}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
+
         </div>
 
         {/* Mobile Menu */}
@@ -121,11 +137,12 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="block w-full text-left py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                  className="block w-full text-left py-3 text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-bold uppercase text-sm tracking-wide border-b border-gray-100 dark:border-gray-800 last:border-0"
                 >
                   {link.name}
                 </button>
               ))}
+
               <button
                 onClick={() => scrollToSection('hero')}
                 className="w-full mt-4 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
