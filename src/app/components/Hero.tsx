@@ -15,7 +15,7 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % BACKGROUND_IMAGES.length);
-    }, 5000);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, []);
@@ -26,28 +26,27 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background with gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-black">
-        <AnimatePresence>
+      <div className="absolute inset-0 z-0 bg-white">
+        <AnimatePresence mode="wait">
           <motion.div
             key="hero-image"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            transition={{ duration: 2, ease: 'easeInOut' }}
             className="absolute inset-0"
           >
             <ImageWithFallback
               src={BACKGROUND_IMAGES[currentImageIndex]}
-              alt="Wedding couple"
-              className="w-full h-full object-cover brightness-110"
+              alt="Photography gallery"
+              className="w-full h-full object-cover"
             />
           </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/10 to-black/20 z-10"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-20">
+      <div className="relative z-20 container mx-auto px-6 text-center text-white">
         <motion.div
           animate={{
             y: [0, -20, 0],
