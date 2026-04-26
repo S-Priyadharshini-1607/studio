@@ -130,14 +130,16 @@ export default function Contact() {
       {/* Floating Buttons */}
       <div className="fixed bottom-24 left-10 z-50 flex flex-col gap-4">
         <a
-          href="tel:+911234567890"
+          href="tel:8870378137"
           className="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+          aria-label="Call FocusStudio"
         >
           <Phone size={24} />
         </a>
         <a
-          href="https://wa.me/911234567890"
+          href="https://wa.me/918870378137"
           className="w-14 h-14 bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+          aria-label="WhatsApp FocusStudio"
         >
           <MessageSquare size={24} />
         </a>

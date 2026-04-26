@@ -86,8 +86,8 @@ export default function Location() {
                 <div>
                   <h3 className="text-xl font-bold mb-2">Phone</h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    <a href="tel:08792740847" className="hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                      08792740847
+                    <a href="tel:8870378137" className="hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                      8870378137
                     </a>
                   </p>
                 </div>
