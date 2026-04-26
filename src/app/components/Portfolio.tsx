@@ -2,38 +2,47 @@ import { motion } from 'motion/react';
 import { useInView } from './hooks/useInView';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
+import portImage1 from '../../assets/port/port1.jpeg';
+import portImage2 from '../../assets/port/port2.jpeg';
+import portImage3 from '../../assets/port/port3.jpeg';
+import portImage4 from '../../assets/port/port4.jpeg';
+import portImage5 from '../../assets/port/port5.jpeg';
+import portImage6 from '../../assets/port/port6.jpeg';
+import portImage7 from '../../assets/port/port7.jpeg';
+import portImage8 from '../../assets/port/port8.jpeg';
+
 const portfolioImages = [
   {
-    url: 'https://images.unsplash.com/photo-1533091090875-1ff4acc497dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwcGhvdG9ncmFwaHl8ZW58MXx8fHwxNzc3MDAxNTIzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Wedding rings',
+    url: portImage1,
+    alt: 'Portfolio image 1',
   },
   {
-    url: 'https://images.unsplash.com/photo-1573676048035-9c2a72b6a12a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHx3ZWRkaW5nJTIwcGhvdG9ncmFwaHl8ZW58MXx8fHwxNzc3MDAxNTIzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Newly wed couple',
+    url: portImage2,
+    alt: 'Portfolio image 2',
   },
   {
-    url: 'https://images.unsplash.com/flagged/photo-1552981941-424aac2b4311?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHx3ZWRkaW5nJTIwcGhvdG9ncmFwaHl8ZW58MXx8fHwxNzc3MDAxNTIzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Groom and bride kissing',
+    url: portImage3,
+    alt: 'Portfolio image 3',
   },
   {
-    url: 'https://images.unsplash.com/photo-1617724975854-70b5d0cedb0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHx3ZWRkaW5nJTIwcGhvdG9ncmFwaHl8ZW58MXx8fHwxNzc3MDAxNTIzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Beach wedding',
+    url: portImage4,
+    alt: 'Portfolio image 4',
   },
   {
-    url: 'https://images.unsplash.com/photo-1519741196428-6a2175fa2557?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw2fHx3ZWRkaW5nJTIwcGhvdG9ncmFwaHl8ZW58MXx8fHwxNzc3MDAxNTIzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Romantic couple',
+    url: portImage5,
+    alt: 'Portfolio image 5',
   },
   {
-    url: 'https://images.unsplash.com/photo-1563808599481-34a342e44508?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw3fHx3ZWRkaW5nJTIwcGhvdG9ncmFwaHl8ZW58MXx8fHwxNzc3MDAxNTIzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Couple on dock',
+    url: portImage6,
+    alt: 'Portfolio image 6',
   },
   {
-    url: 'https://images.unsplash.com/photo-1617725145063-56958eadf557?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw4fHx3ZWRkaW5nJTIwcGhvdG9ncmFwaHl8ZW58MXx8fHwxNzc3MDAxNTIzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Walking on beach',
+    url: portImage7,
+    alt: 'Portfolio image 7',
   },
   {
-    url: 'https://images.unsplash.com/photo-1608326670856-e3b41eecb106?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw5fHx3ZWRkaW5nJTIwcGhvdG9ncmFwaHl8ZW58MXx8fHwxNzc3MDAxNTIzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    alt: 'Couple on rocks',
+    url: portImage8,
+    alt: 'Portfolio image 8',
   },
 ];
 

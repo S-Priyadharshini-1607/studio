@@ -52,19 +52,19 @@ export default function About() {
             <div className="relative h-[400px] md:h-[600px] w-full">
               <div className="absolute -inset-4 border-2 border-amber-200 dark:border-amber-900/30 rounded-lg -z-10 translate-x-8 translate-y-8"></div>
               <div className="relative h-full w-full overflow-hidden rounded-lg shadow-2xl bg-gray-100">
-                <AnimatePresence mode="wait">
+                <AnimatePresence initial={false}>
                   <motion.div
                     key={currentImageIndex}
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.8, ease: 'easeInOut' }}
                     className="absolute inset-0"
                   >
                     <ImageWithFallback
                       src={ABOUT_IMAGES[currentImageIndex]}
                       alt={`Studio story image ${currentImageIndex + 1}`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain object-center bg-black"
                     />
                   </motion.div>
                 </AnimatePresence>
