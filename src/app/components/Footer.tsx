@@ -1,8 +1,8 @@
-import { Heart } from 'lucide-react';
+import { Heart, Mail, MapPin, Phone, PhoneCall } from 'lucide-react';
 
 export default function Footer() {
   const footerLinks = {
-    Services: ['Wedding Photography', 'Engagement Sessions', 'Albums', 'Packages'],
+    Services: ['Photoshoot Type', 'Lifestyle Photoshoot', 'Event Photoshoot', 'Commercial Photoshoot'],
     Company: ['About Us', 'Portfolio', 'Blog', 'Contact'],
     Resources: ['Pricing Guide', 'FAQ', 'Client Gallery', 'Testimonials'],
     Legal: ['Privacy Policy', 'Terms of Service', 'Copyright', 'License'],
@@ -17,19 +17,44 @@ export default function Footer() {
             <div className="text-2xl font-bold text-white mb-4">
               FocusStudio
             </div>
-            <p className="text-sm mb-6">
+            <p className="text-sm mb-4 max-w-sm">
               Capturing your most precious memories with artistry and passion.
             </p>
-            <div className="flex gap-3">
-              {['𝕏', 'in', 'f', '📷'].map((icon, index) => (
-                <button
-                  key={index}
-                  className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors text-sm"
-                >
-                  {icon}
-                </button>
-              ))}
+            <div className="flex flex-wrap gap-3 mb-6">
+              <a
+                href="tel:9715913325"
+                className="w-11 h-11 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                aria-label="Call 9715913325"
+              >
+                <Phone size={18} />
+              </a>
+              <a
+                href="tel:041515291161"
+                className="w-11 h-11 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                aria-label="Call 041515291161"
+              >
+                <PhoneCall size={18} />
+              </a>
+              <a
+                href="mailto:focusstudiokp@gmail.com"
+                className="w-11 h-11 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                aria-label="Email focusstudiokp@gmail.com"
+              >
+                <Mail size={18} />
+              </a>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=1+Floor%2C+Focus+Photography%2C+Near+GH%2C+Mandhaveli%2C+Kallakurichi+-+Kachirapalayam+Road%2C+Kallakurichi-606202%2C+Tamil+Nadu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-11 h-11 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                aria-label="Open location in Google Maps"
+              >
+                <MapPin size={18} />
+              </a>
             </div>
+            <p className="text-xs text-gray-400 max-w-xs">
+              Tap the phone icon to call mobile numbers, the telephone icon for our landline, the email icon to send a message, or the map icon to open the pinned address in Google Maps.
+            </p>
           </div>
 
           {/* Links */}
@@ -51,9 +76,6 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm flex items-center gap-2">
-            © 2026 FocusStudio. Made with <Heart size={16} className="text-red-500 fill-red-500" /> in San Francisco
-          </p>
           <div className="flex gap-6 text-sm">
             <button className="hover:text-white transition-colors">Status</button>
             <button className="hover:text-white transition-colors">Changelog</button>
