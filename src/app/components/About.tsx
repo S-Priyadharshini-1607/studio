@@ -2,11 +2,14 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 
+import aboutImage1 from '../../assets/back/back1.jpeg';
+import aboutImage2 from '../../assets/back/back2.jpeg';
+import aboutImage3 from '../../assets/back/back3.jpeg';
+
 const ABOUT_IMAGES = [
-  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=1000&auto=format&fit=crop"
+  aboutImage1,
+  aboutImage2,
+  aboutImage3,
 ];
 
 
