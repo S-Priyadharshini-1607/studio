@@ -56,45 +56,6 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-6 text-center text-white">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold mb-6"
-        >
-          Capturing Your Forever Moments
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-white/90"
-        >
-          Timeless wedding photography that tells your unique love story with elegance and artistry.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-        >
-          <button
-            onClick={() => scrollToSection('features')}
-            className="px-8 py-4 bg-white text-blue-600 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 flex items-center justify-center gap-2 group"
-          >
-            Start Now
-            <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
-          </button>
-          <button
-            onClick={() => scrollToSection('about')}
-            className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all transform hover:scale-105"
-          >
-            Learn More
-          </button>
-        </motion.div>
-
         {/* Floating elements */}
         <motion.div
           animate={{
@@ -119,6 +80,7 @@ export default function Hero() {
           className="absolute bottom-1/4 right-10 w-24 h-24 bg-white/10 rounded-full blur-xl"
         />
       </div>
+
 
       {/* Scroll indicator */}
       <motion.div

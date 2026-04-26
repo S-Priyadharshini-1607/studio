@@ -28,11 +28,12 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
   };
 
   const navLinks = [
-    { name: 'Portfolio', id: 'portfolio' },
+    { name: 'Home', id: 'hero' },
+    { name: 'About us', id: 'about' },
     { name: 'Services', id: 'services' },
-    { name: 'Testimonials', id: 'testimonials' },
     { name: 'Contact', id: 'contact' },
   ];
+
 
   return (
     <motion.nav
@@ -50,13 +51,13 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-2xl font-bold text-rose-600 dark:text-rose-400"
+            className="text-2xl font-bold text-rose-600 dark:text-rose-400 min-w-[150px]"
           >
             FocusStudio
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex flex-1 justify-center items-center gap-8">
             {navLinks.map((link, index) => (
               <motion.button
                 key={link.id}
@@ -64,11 +65,14 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
                 onClick={() => scrollToSection(link.id)}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
               >
                 {link.name}
               </motion.button>
             ))}
+          </div>
+
+          <div className="hidden md:flex items-center gap-4 min-w-[200px] justify-end">
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
@@ -85,6 +89,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
               Get Started
             </motion.button>
           </div>
+
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-4">
