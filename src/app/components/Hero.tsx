@@ -4,11 +4,10 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 
 const BACKGROUND_IMAGES = [
-  "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?q=80&w=1080&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1080&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1080&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1080&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=1080&auto=format&fit=crop"
+  "/src/assets/gallery/img3.jpg",
+  "/src/assets/gallery/img4.jpg",
+  "/src/assets/gallery/img5.webp",
+  "/src/assets/gallery/img6.webp"
 ];
 
 
@@ -19,7 +18,7 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % BACKGROUND_IMAGES.length);
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
@@ -37,7 +36,7 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background with gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-black">
+      <div className="absolute inset-0 z-0 bg-white">
         <AnimatePresence>
           <motion.div
             key={currentImageIndex}
@@ -54,34 +53,12 @@ export default function Hero() {
             />
           </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-black/60 z-10"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-6 text-center text-white">
-        {/* Floating elements */}
-        <motion.div
-          animate={{
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute top-1/4 left-10 w-16 h-16 bg-white/10 rounded-full blur-xl"
-        />
-        <motion.div
-          animate={{
-            y: [0, 20, 0],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute bottom-1/4 right-10 w-24 h-24 bg-white/10 rounded-full blur-xl"
-        />
+      <div className="relative z-20 container mx-auto px-6 text-center text-white">
+      </div>
       </div>
 
 
