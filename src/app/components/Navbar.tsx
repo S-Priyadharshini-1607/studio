@@ -81,7 +81,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
           <div className="hidden md:flex items-center gap-4 min-w-[200px] justify-end">
             <button
               onClick={toggleDarkMode}
-              className={`p-2 rounded-full transition-colors ${
+              className={`p-3 rounded-full transition-colors ${
                 isScrolled 
                   ? 'hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300' 
                   : 'hover:bg-white/20 text-white'
@@ -116,7 +116,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-2 transition-colors ${isScrolled ? 'text-gray-900 dark:text-white' : 'text-white'}`}
+              className={`p-3 transition-colors ${isScrolled ? 'text-gray-900 dark:text-white' : 'text-white'}`}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>

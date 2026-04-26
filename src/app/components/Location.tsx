@@ -33,7 +33,7 @@ export default function Location() {
             className="rounded-2xl overflow-hidden shadow-2xl h-96"
           >
             <iframe
-              src="https://maps.google.com/maps?q=1%20Floor%2C%20Focus%20Photography%2C%20Near%20GH%2C%20Mandhaveli%2C%20Kallakurichi%20-%20Kachirapalayam%20Road%2C%20Kallakurichi-606202%2C%20Tamil%20Nadu&output=embed"
+              src="https://maps.google.com/maps?q=1%20Floor%2C%20Focus%20Photography%2C%20Near%20GH%2C%20Mandhaveli%2C%20Kallakurichi%20-%20Kachirapalayam%20Road%2C%20Kallakurichi-606202%2C%20Tamil%20Nadu&t=&z=17&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
