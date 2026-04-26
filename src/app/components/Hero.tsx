@@ -4,12 +4,13 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 
 const BACKGROUND_IMAGES = [
+  "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?q=80&w=1080&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1080&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1080&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1544078751-58fee2d8a03b?q=80&w=1080&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1529636760656-d097404dec85?q=80&w=1080&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1080&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1080&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1080&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=1080&auto=format&fit=crop"
 ];
+
 
 
 export default function Hero() {
