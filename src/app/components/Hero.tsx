@@ -1,21 +1,13 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
+import image1 from '../../assets/picture/1.jpeg';
+import image2 from '../../assets/picture/2.jpeg';
+import image3 from '../../assets/picture/3.jpeg';
+import image4 from '../../assets/picture/4.jpeg';
+import image5 from '../../assets/picture/5.jpeg';
 
-import image1 from '../../assets/1.jpeg';
-import image2 from '../../assets/2.jpeg';
-import image3 from '../../assets/3.jpeg';
-import image4 from '../../assets/4.jpeg';
-import image5 from '../../assets/5.jpeg';
-
-const BACKGROUND_IMAGES = [
-  image1,
-  image2,
-  image3,
-  image4,
-  image5,
-];
+const BACKGROUND_IMAGES = [image1, image2, image3, image4, image5];
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -37,7 +29,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 bg-black">
         <AnimatePresence>
           <motion.div
-            key={currentImageIndex}
+            key="hero-image"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -55,7 +47,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-6 text-center text-white">
+      <div className="relative z-20">
         <motion.div
           animate={{
             y: [0, -20, 0],

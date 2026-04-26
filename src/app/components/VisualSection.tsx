@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { useInView } from './hooks/useInView';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import lovImage from '../../assets/lov.jpg';
 
 const benefits = [
   'Unlimited photos on your wedding day',
@@ -39,7 +40,7 @@ export default function VisualSection() {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <div className="aspect-[4/3]">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1562826772-be179f321470?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxMHx8d2VkZGluZyUyMHBob3RvZ3JhcGh5fGVufDF8fHx8MTc3NzAwMTUyM3ww&ixlib=rb-4.1.0&q=80&w=1080"
+                  src={lovImage}
                   alt="Wedding couple"
                   className="w-full h-full object-cover"
                 />
