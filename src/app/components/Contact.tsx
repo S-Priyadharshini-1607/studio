@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { Send, Phone, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 
+import contactBg from '../../assets/mes/contact-bg.jpeg';
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -26,8 +28,8 @@ export default function Contact() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2000&auto=format&fit=crop" 
-          alt="Wedding backdrop" 
+          src={contactBg}
+          alt="Message page backdrop" 
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40"></div>
