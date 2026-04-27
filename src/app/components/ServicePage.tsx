@@ -1,6 +1,18 @@
 import { motion } from 'motion/react';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 
+// Import Prewedding Images
+import pre1 from '../../assets/prewedding/01.jpg.jpeg';
+import pre2 from '../../assets/prewedding/010.jpg.jpeg';
+import pre3 from '../../assets/prewedding/016.jpg.jpeg';
+import pre4 from '../../assets/prewedding/03.jpg.jpeg';
+import pre5 from '../../assets/prewedding/04.jpg.jpeg';
+import pre6 from '../../assets/prewedding/05.jpg.jpeg';
+import pre7 from '../../assets/prewedding/07.jpg.jpeg';
+import pre8 from '../../assets/prewedding/08.jpg.jpeg';
+import pre9 from '../../assets/prewedding/020.jpg.jpeg';
+import pre10 from '../../assets/prewedding/021.jpg.jpeg';
+
 interface ServicePageProps {
   serviceName: string;
   onBack: () => void;
@@ -10,11 +22,7 @@ const serviceData: Record<string, { title: string; description: string; images: 
   'Prewedding': {
     title: 'Prewedding Photography',
     description: 'Capture the anticipation and romance before your big day. We find the most scenic locations and use natural light to tell your unique love story.',
-    images: [
-      'https://images.unsplash.com/photo-1583939000340-c6925ea451db?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop'
-    ]
+    images: [pre1, pre2, pre3, pre4, pre5, pre6, pre7, pre8, pre9, pre10]
   },
   'Postwedding': {
     title: 'Postwedding Celebrations',
@@ -130,22 +138,37 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           {/* Sample Gallery Section */}
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-8 text-center">Sample Gallery</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {data.images.map((img, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.1 * idx }}
-                  className="rounded-2xl overflow-hidden aspect-[4/5] shadow-lg group"
-                >
-                  <img 
-                    src={img} 
-                    alt={`${serviceName} sample ${idx + 1}`} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                </motion.div>
-              ))}
+            <div className={serviceName === 'Prewedding' 
+              ? "grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]" 
+              : "grid md:grid-cols-3 gap-6"}>
+              {data.images.map((img, idx) => {
+                let spanClass = "";
+                if (serviceName === 'Prewedding') {
+                  if (idx === 0) spanClass = "md:col-span-2 md:row-span-2";
+                  else if (idx === 7) spanClass = "md:col-span-2 md:row-span-2";
+                  else spanClass = "md:col-span-1 md:row-span-1";
+                } else {
+                  spanClass = "aspect-[4/5]";
+                }
+
+                return (
+                  <motion.div 
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.05 * idx }}
+                    className={`rounded-2xl overflow-hidden shadow-lg group relative ${spanClass}`}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`${serviceName} sample ${idx + 1}`} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
 
