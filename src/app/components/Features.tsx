@@ -1,5 +1,4 @@
 import { motion } from 'motion/react';
-import { Heart, Camera, PartyPopper, Sparkles, Baby, Users, GraduationCap } from 'lucide-react';
 import { useInView } from './hooks/useInView';
 
 interface FeaturesProps {
@@ -8,56 +7,52 @@ interface FeaturesProps {
 
 const mainServices = [
   {
+    name: 'Wedding',
+    color: 'from-amber-500 to-orange-600',
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop'
+  },
+  {
     name: 'Prewedding',
-    icon: Heart,
     color: 'from-rose-500 to-pink-500',
     image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=600&auto=format&fit=crop'
   },
   {
     name: 'Postwedding',
-    icon: Camera,
     color: 'from-blue-500 to-cyan-500',
     image: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=600&auto=format&fit=crop'
   },
   {
     name: 'Engagement',
-    icon: Sparkles,
     color: 'from-purple-500 to-indigo-500',
     image: 'https://images.unsplash.com/photo-1515543169302-35804576d165?q=80&w=600&auto=format&fit=crop'
   },
   {
     name: 'Birthday Shoots',
-    icon: PartyPopper,
     color: 'from-orange-500 to-amber-500',
     image: 'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=600&auto=format&fit=crop'
   },
   {
     name: 'Baby Shower',
-    icon: Baby,
     color: 'from-pink-400 to-rose-400',
     image: 'https://images.unsplash.com/photo-1555243896-c709bfa0b564?q=80&w=600&auto=format&fit=crop'
   },
   {
     name: 'Newborn Shoot',
-    icon: Baby,
     color: 'from-emerald-400 to-teal-500',
     image: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop'
   },
   {
     name: 'Candid Photography',
-    icon: Camera,
     color: 'from-fuchsia-500 to-purple-500',
     image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=600&auto=format&fit=crop'
   },
   {
     name: 'School Function',
-    icon: Users,
     color: 'from-blue-400 to-indigo-500',
     image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop'
   },
   {
     name: 'College Functions',
-    icon: GraduationCap,
     color: 'from-red-400 to-rose-600',
     image: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=600&auto=format&fit=crop'
   }
@@ -89,7 +84,6 @@ export default function Features({ onNavigateService }: FeaturesProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {mainServices.map((service, index) => {
-            const Icon = service.icon;
             return (
               <motion.div
                 key={service.name}
@@ -110,11 +104,6 @@ export default function Features({ onNavigateService }: FeaturesProps) {
                   <div className={`absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 transition-all duration-500 group-hover:h-full`} />
                   
                   <div className="absolute bottom-8 left-8 right-8 z-20 flex flex-col gap-4">
-                    <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${service.color} p-0.5 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                      <div className="w-full h-full bg-black/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                        <Icon className="text-white" size={24} />
-                      </div>
-                    </div>
                     <h3 className="text-2xl font-bold text-white tracking-wide group-hover:text-amber-400 transition-colors">
                       {service.name}
                     </h3>

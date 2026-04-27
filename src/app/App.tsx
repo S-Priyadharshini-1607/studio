@@ -22,13 +22,38 @@ export default function App() {
   const navigateToService = (service: string) => {
     setSelectedService(service);
     setCurrentPage('service');
+    window.history.pushState({ page: 'service', service }, '', `#${service}`);
     window.scrollTo(0, 0);
   };
 
   const navigateToHome = () => {
     setCurrentPage('home');
+    window.history.pushState({ page: 'home' }, '', '/');
     window.scrollTo(0, 0);
   };
+
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const state = event.state;
+      if (state && state.page === 'service') {
+        setSelectedService(state.service);
+        setCurrentPage('service');
+      } else {
+        setCurrentPage('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    
+    // Handle initial state if user refreshes on a service
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      setSelectedService(hash);
+      setCurrentPage('service');
+    }
+
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {

@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { useInView } from './hooks/useInView';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Lightbox } from './ui/Lightbox';
 
 import portImage1 from '../../assets/port/port1.jpeg';
 import portImage2 from '../../assets/port/port2.jpeg';
@@ -48,6 +50,13 @@ const portfolioImages = [
 
 export default function Portfolio() {
   const [ref, isInView] = useInView({ threshold: 0.1 });
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const openLightbox = (index: number) => {
+    setCurrentIndex(index);
+    setLightboxOpen(true);
+  };
 
   return (
     <section
@@ -78,6 +87,7 @@ export default function Portfolio() {
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ scale: 1.05, zIndex: 10 }}
+              onClick={() => openLightbox(index)}
               className="relative aspect-square overflow-hidden rounded-lg shadow-lg cursor-pointer group"
             >
               <ImageWithFallback
@@ -91,6 +101,15 @@ export default function Portfolio() {
             </motion.div>
           ))}
         </div>
+
+        <Lightbox 
+          isOpen={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          images={portfolioImages.map(img => img.url)}
+          currentIndex={currentIndex}
+          onPrev={() => setCurrentIndex((prev) => (prev - 1 + portfolioImages.length) % portfolioImages.length)}
+          onNext={() => setCurrentIndex((prev) => (prev + 1) % portfolioImages.length)}
+        />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

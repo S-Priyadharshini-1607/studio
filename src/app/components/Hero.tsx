@@ -15,7 +15,7 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % BACKGROUND_IMAGES.length);
-    }, 20000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
@@ -33,7 +33,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 2, ease: 'easeInOut' }}
+            transition={{ duration: 1, ease: 'easeInOut' }}
             className="absolute inset-0"
           >
             <ImageWithFallback

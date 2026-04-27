@@ -109,7 +109,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
                     exit={{ opacity: 0, y: 10 }}
                     className="absolute top-full mt-4 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 rounded-xl shadow-xl py-2 w-48 overflow-hidden"
                   >
-                    {['Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots', 'Baby Shower', 'Newborn Shoot', 'Candid Photography', 'School Function', 'College Functions'].map((service) => (
+                    {['Wedding', 'Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots', 'Baby Shower', 'Newborn Shoot', 'Candid Photography', 'School Function', 'College Functions'].map((service) => (
                       <button
                         key={service}
                         onClick={() => {
@@ -199,7 +199,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
                   </button>
                   {link.id === 'services' && isServicesOpen && (
                     <div className="pl-4 py-2 flex flex-col gap-3 border-b border-gray-100 dark:border-gray-800">
-                      {['Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots'].map((service) => (
+                      {['Wedding', 'Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots'].map((service) => (
                         <button
                           key={service}
                           onClick={() => {

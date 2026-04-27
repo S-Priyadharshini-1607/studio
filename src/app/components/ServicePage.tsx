@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { Lightbox } from './ui/Lightbox';
 
 // Import Prewedding Images
 import pre1 from '../../assets/prewedding/01.jpg.jpeg';
@@ -13,12 +15,29 @@ import pre8 from '../../assets/prewedding/08.jpg.jpeg';
 import pre9 from '../../assets/prewedding/020.jpg.jpeg';
 import pre10 from '../../assets/prewedding/021.jpg.jpeg';
 
+// Import Wedding Images
+import wed1 from '../../assets/wedding/009A2700.JPG.jpeg';
+import wed2 from '../../assets/wedding/009A2713.JPG.jpeg';
+import wed3 from '../../assets/wedding/009A2739.JPG.jpeg';
+import wed4 from '../../assets/wedding/009A3450.JPG.jpeg';
+import wed5 from '../../assets/wedding/009A3762.JPG.jpeg';
+import wed6 from '../../assets/wedding/009A4511.JPG.jpeg';
+import wed7 from '../../assets/wedding/009A8499.JPG.jpeg';
+import wed8 from '../../assets/wedding/009A8547.JPG.jpeg';
+import wed9 from '../../assets/wedding/009A8548.JPG.jpeg';
+import wed10 from '../../assets/wedding/009A8556.JPG.jpeg';
+
 interface ServicePageProps {
   serviceName: string;
   onBack: () => void;
 }
 
 const serviceData: Record<string, { title: string; description: string; images: string[] }> = {
+  'Wedding': {
+    title: 'Wedding Photography',
+    description: 'Timeless, elegant, and emotive wedding photography that captures every moment of your special day, from the quiet whispers to the grand celebrations.',
+    images: [wed1, wed2, wed3, wed4, wed5, wed6, wed7, wed8, wed9, wed10]
+  },
   'Prewedding': {
     title: 'Prewedding Photography',
     description: 'Capture the anticipation and romance before your big day. We find the most scenic locations and use natural light to tell your unique love story.',
@@ -99,6 +118,14 @@ const serviceData: Record<string, { title: string; description: string; images: 
 };
 
 export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const openLightbox = (index: number) => {
+    setCurrentIndex(index);
+    setLightboxOpen(true);
+  };
+
   // Fallback data in case the serviceName doesn't strictly match
   const data = serviceData[serviceName] || {
     title: `${serviceName} Photography`,
@@ -113,14 +140,6 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
   return (
     <div className="pt-24 min-h-screen bg-gray-50 dark:bg-gray-900 pb-20">
       <div className="container mx-auto px-6 py-12">
-        <button 
-          onClick={onBack}
-          className="flex items-center gap-2 text-rose-600 hover:text-rose-700 font-medium mb-8 transition-colors bg-rose-50 dark:bg-rose-900/30 px-4 py-2 rounded-full w-fit"
-        >
-          <ArrowLeft size={18} />
-          Back to Home
-        </button>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -138,7 +157,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           {/* Sample Gallery Section */}
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-8 text-center">Sample Gallery</h2>
-            <div className={serviceName === 'Prewedding' 
+            <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding') 
               ? "grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]" 
               : "grid md:grid-cols-3 gap-6"}>
               {data.images.map((img, idx) => {
@@ -146,6 +165,12 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                 if (serviceName === 'Prewedding') {
                   if (idx === 0) spanClass = "md:col-span-2 md:row-span-2";
                   else if (idx === 7) spanClass = "md:col-span-2 md:row-span-2";
+                  else spanClass = "md:col-span-1 md:row-span-1";
+                } else if (serviceName === 'Wedding') {
+                  if (idx === 0) spanClass = "md:col-span-4 md:row-span-2";
+                  else if (idx === 1) spanClass = "md:col-span-2 md:row-span-2";
+                  else if (idx === 4) spanClass = "md:col-span-2 md:row-span-2";
+                  else if (idx === 9) spanClass = "md:col-span-2 md:row-span-1";
                   else spanClass = "md:col-span-1 md:row-span-1";
                 } else {
                   spanClass = "aspect-[4/5]";
@@ -158,7 +183,8 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.05 * idx }}
-                    className={`rounded-2xl overflow-hidden shadow-lg group relative ${spanClass}`}
+                    onClick={() => openLightbox(idx)}
+                    className={`rounded-2xl overflow-hidden shadow-lg group relative cursor-pointer ${spanClass}`}
                   >
                     <img 
                       src={img} 
@@ -171,6 +197,15 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
               })}
             </div>
           </div>
+
+          <Lightbox 
+            isOpen={lightboxOpen}
+            onClose={() => setLightboxOpen(false)}
+            images={data.images}
+            currentIndex={currentIndex}
+            onPrev={() => setCurrentIndex((prev) => (prev - 1 + data.images.length) % data.images.length)}
+            onNext={() => setCurrentIndex((prev) => (prev + 1) % data.images.length)}
+          />
 
           {/* Pricing / Booking Call to Action */}
           <div className="grid md:grid-cols-2 gap-8">
