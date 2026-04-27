@@ -26,10 +26,10 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background with gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-white">
-        <AnimatePresence mode="wait">
+      <div className="absolute inset-0 z-0 bg-white dark:bg-gray-900">
+        <AnimatePresence>
           <motion.div
-            key="hero-image"
+            key={currentImageIndex}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -40,6 +40,7 @@ export default function Hero() {
               src={BACKGROUND_IMAGES[currentImageIndex]}
               alt="Photography gallery"
               className="w-full h-full object-cover"
+              loading="eager"
             />
           </motion.div>
         </AnimatePresence>
