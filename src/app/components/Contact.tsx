@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Send, Phone, MessageSquare } from 'lucide-react';
+import { Send, Phone, MessageSquare, Calendar } from 'lucide-react';
 import { useState } from 'react';
 
 import contactBg from '../../assets/mes/contact-bg.jpeg';
@@ -9,8 +9,8 @@ export default function Contact() {
     name: '',
     phone: '',
     email: '',
-    subject: '',
-    message: '',
+    bookingDate: '',
+    enquiry: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -19,7 +19,7 @@ export default function Contact() {
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
-      setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', phone: '', email: '', bookingDate: '', enquiry: '' });
     }, 3000);
   };
 
@@ -41,7 +41,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="w-full max-w-2xl bg-white rounded-3xl p-8 md:p-12 shadow-2xl"
+          className="w-full max-w-xl bg-white rounded-3xl p-6 md:p-8 shadow-2xl"
         >
           <div className="mb-8">
             <h2 className="text-4xl md:text-5xl font-serif text-gray-900 mb-4">
@@ -91,28 +91,33 @@ export default function Contact() {
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Subject *</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Enter Subject"
-                  className="w-full px-0 py-2 border-b border-gray-300 focus:border-amber-600 focus:outline-none transition-colors bg-transparent"
-                  value={formData.subject}
-                  onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                />
+                <label className="text-sm font-medium text-gray-700">Booking Date *</label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="date"
+                    required
+                    className="w-full px-0 py-2 border-b border-gray-300 focus:border-amber-600 focus:outline-none transition-colors bg-transparent"
+                    value={formData.bookingDate}
+                    onChange={(e) => setFormData({...formData, bookingDate: e.target.value})}
+                  />
+                </div>
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Message *</label>
-              <textarea
+              <label className="text-sm font-medium text-gray-700">Enquiry *</label>
+              <select
                 required
-                rows={4}
-                placeholder="Type Your Message..."
-                className="w-full px-0 py-2 border-b border-gray-300 focus:border-amber-600 focus:outline-none transition-colors bg-transparent resize-none"
-                value={formData.message}
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
-              ></textarea>
+                className="w-full px-0 py-2 border-b border-gray-300 focus:border-amber-600 focus:outline-none transition-colors bg-transparent cursor-pointer"
+                value={formData.enquiry}
+                onChange={(e) => setFormData({...formData, enquiry: e.target.value})}
+              >
+                <option value="" disabled>Select Enquiry Type</option>
+                <option value="Prewedding">Prewedding</option>
+                <option value="Postwedding">Postwedding</option>
+                <option value="Engagement">Engagement</option>
+                <option value="Birthday Shoots">Birthday Shoots</option>
+              </select>
             </div>
 
             <div className="pt-4">

@@ -63,7 +63,7 @@ export default function Portfolio() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Our Portfolio
+            Capture Your Moments
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             A glimpse into the beautiful moments we've captured for couples around the world

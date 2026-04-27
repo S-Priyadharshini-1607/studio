@@ -1,156 +1,128 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Camera, 
-  Heart, 
-  Image as ImageIcon, 
-  Sparkles, 
-  Plane, 
-  Baby, 
-  Calendar, 
-  Video, 
-  Briefcase,
-  Users,
-  Megaphone,
-  PartyPopper
-} from 'lucide-react';
+import { motion } from 'motion/react';
+import { Heart, Camera, PartyPopper, Sparkles, Baby, Users, GraduationCap } from 'lucide-react';
 import { useInView } from './hooks/useInView';
 
-type Category = 'Photoshoot Type' | 'Lifestyle Photoshoot' | 'Event Photoshoot' | 'Commercial Photoshoot' | 'Services';
+interface FeaturesProps {
+  onNavigateService?: (service: string) => void;
+}
 
-const serviceData: Record<Category, { name: string; icon: any; color: string; image: string }[]> = {
-  "Photoshoot Type": [
-    { name: "Drone Shoot", icon: Plane, color: "from-blue-500 to-cyan-500", image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=600&auto=format&fit=crop" },
-    { name: "Portfolio", icon: ImageIcon, color: "from-purple-500 to-indigo-500", image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=600&auto=format&fit=crop" },
-    { name: "Pre Wedding Shoot", icon: Heart, color: "from-rose-500 to-pink-500", image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=600&auto=format&fit=crop" },
-    { name: "Newborn Shoot", icon: Baby, color: "from-emerald-500 to-teal-500", image: "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop" },
-    { name: "Event Shoot", icon: Calendar, color: "from-orange-500 to-amber-500", image: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=600&auto=format&fit=crop" },
-    { name: "Candid Photography", icon: Camera, color: "from-fuchsia-500 to-purple-500", image: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=600&auto=format&fit=crop" }
-  ],
-  "Lifestyle Photoshoot": [
-    { name: "Maternity Shoot", icon: Heart, color: "from-rose-400 to-pink-500", image: "https://images.unsplash.com/photo-1555243896-c709bfa0b564?q=80&w=600&auto=format&fit=crop" },
-    { name: "Kids Shoot", icon: Baby, color: "from-cyan-400 to-blue-500", image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=600&auto=format&fit=crop" },
-    { name: "Family Shoot", icon: Users, color: "from-violet-500 to-purple-600", image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop" }
-  ],
-  "Event Photoshoot": [
-    { name: "Birthday Party Shoot", icon: PartyPopper, color: "from-yellow-400 to-orange-500", image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=600&auto=format&fit=crop" },
-    { name: "Mehendi Ceremony Photoshoot", icon: Sparkles, color: "from-green-400 to-emerald-600", image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=600&auto=format&fit=crop" }
-  ],
-  "Commercial Photoshoot": [
-    { name: "Commercial Photoshoot", icon: Briefcase, color: "from-slate-600 to-slate-800", image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop" },
-    { name: "Advertising Shoot", icon: Megaphone, color: "from-red-500 to-rose-600", image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=600&auto=format&fit=crop" }
-  ],
-  "Services": [
-    { name: "Videography", icon: Video, color: "from-indigo-500 to-blue-600", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=600&auto=format&fit=crop" }
-  ]
-};
+const mainServices = [
+  {
+    name: 'Prewedding',
+    icon: Heart,
+    color: 'from-rose-500 to-pink-500',
+    image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=600&auto=format&fit=crop'
+  },
+  {
+    name: 'Postwedding',
+    icon: Camera,
+    color: 'from-blue-500 to-cyan-500',
+    image: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=600&auto=format&fit=crop'
+  },
+  {
+    name: 'Engagement',
+    icon: Sparkles,
+    color: 'from-purple-500 to-indigo-500',
+    image: 'https://images.unsplash.com/photo-1515543169302-35804576d165?q=80&w=600&auto=format&fit=crop'
+  },
+  {
+    name: 'Birthday Shoots',
+    icon: PartyPopper,
+    color: 'from-orange-500 to-amber-500',
+    image: 'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=600&auto=format&fit=crop'
+  },
+  {
+    name: 'Baby Shower',
+    icon: Baby,
+    color: 'from-pink-400 to-rose-400',
+    image: 'https://images.unsplash.com/photo-1555243896-c709bfa0b564?q=80&w=600&auto=format&fit=crop'
+  },
+  {
+    name: 'Newborn Shoot',
+    icon: Baby,
+    color: 'from-emerald-400 to-teal-500',
+    image: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop'
+  },
+  {
+    name: 'Candid Photography',
+    icon: Camera,
+    color: 'from-fuchsia-500 to-purple-500',
+    image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=600&auto=format&fit=crop'
+  },
+  {
+    name: 'School Function',
+    icon: Users,
+    color: 'from-blue-400 to-indigo-500',
+    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop'
+  },
+  {
+    name: 'College Functions',
+    icon: GraduationCap,
+    color: 'from-red-400 to-rose-600',
+    image: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=600&auto=format&fit=crop'
+  }
+];
 
-const categories = Object.keys(serviceData) as Category[];
-
-export default function Features() {
+export default function Features({ onNavigateService }: FeaturesProps) {
   const [ref, isInView] = useInView({ threshold: 0.1 });
-  const [activeCategory, setActiveCategory] = useState<Category>("Photoshoot Type");
 
   return (
     <section
       id="services"
       ref={ref}
-      className="py-20 bg-gray-50 dark:bg-gray-800 min-h-screen"
+      className="py-20 bg-gray-50 dark:bg-gray-800 min-h-screen flex items-center"
     >
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Our Services
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Comprehensive photography and videography packages tailored to capture your vision perfectly
+            Comprehensive photography packages tailored to capture your vision perfectly
           </p>
         </motion.div>
 
-        {/* Category Selection */}
-        <div className="mb-12">
-          {/* Mobile Dropdown */}
-          <div className="md:hidden">
-            <select
-              value={activeCategory}
-              onChange={(e) => setActiveCategory(e.target.value as Category)}
-              className="w-full p-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm appearance-none"
-            >
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Desktop Tabs */}
-          <div className="hidden md:flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 ${
-                  activeCategory === category
-                    ? 'bg-blue-600 text-white shadow-md hover:shadow-lg'
-                    : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700'
-                }`}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {mainServices.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <motion.div
+                key={service.name}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
+                onClick={() => onNavigateService && onNavigateService(service.name)}
+                className="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all cursor-pointer group border border-gray-100 dark:border-gray-800 flex flex-col h-full"
               >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Service Cards Grid */}
-        <div className="min-h-[400px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {serviceData[activeCategory].map((service, index) => {
-                const Icon = service.icon;
-                return (
-                  <motion.div
-                    key={service.name}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    whileHover={{ y: -5 }}
-                    className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group flex flex-col border border-transparent hover:border-gray-100 dark:hover:border-gray-700"
-                  >
-                    <div className="p-6 flex items-center gap-4 border-b border-gray-100 dark:border-gray-800">
-                      <div
-                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm`}
-                      >
+                <div className="relative h-80 w-full overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10 duration-500" />
+                  <img 
+                    src={service.image} 
+                    alt={service.name} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className={`absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 transition-all duration-500 group-hover:h-full`} />
+                  
+                  <div className="absolute bottom-8 left-8 right-8 z-20 flex flex-col gap-4">
+                    <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${service.color} p-0.5 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <div className="w-full h-full bg-black/20 rounded-full flex items-center justify-center backdrop-blur-sm">
                         <Icon className="text-white" size={24} />
                       </div>
-                      <h3 className="text-lg font-bold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        {service.name}
-                      </h3>
                     </div>
-                    <div className="relative h-48 w-full overflow-hidden">
-                      <img 
-                        src={service.image} 
-                        alt={service.name} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
+                    <h3 className="text-2xl font-bold text-white tracking-wide group-hover:text-amber-400 transition-colors">
+                      {service.name}
+                    </h3>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

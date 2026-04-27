@@ -11,10 +11,24 @@ import Contact from './components/Contact';
 import Location from './components/Location';
 import Footer from './components/Footer';
 import Loading from './components/Loading';
+import ServicePage from './components/ServicePage';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState<'home' | 'service'>('home');
+  const [selectedService, setSelectedService] = useState('');
+
+  const navigateToService = (service: string) => {
+    setSelectedService(service);
+    setCurrentPage('service');
+    window.scrollTo(0, 0);
+  };
+
+  const navigateToHome = () => {
+    setCurrentPage('home');
+    window.scrollTo(0, 0);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,18 +56,35 @@ export default function App() {
         {showLoading && <Loading />}
       </AnimatePresence>
 
-      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <Navbar 
+        darkMode={darkMode} 
+        toggleDarkMode={toggleDarkMode} 
+        onNavigateService={navigateToService}
+        onNavigateHome={navigateToHome}
+        currentPage={currentPage}
+      />
 
       <main>
-        <Hero />
-        <About />
-        <Portfolio />
-        <Features />
-        <VisualSection />
-        <Contact />
-        <Location />
+        {currentPage === 'home' ? (
+          <>
+            <Hero />
+            <About />
+            <Portfolio />
+            <Features onNavigateService={navigateToService} />
+            <VisualSection />
+            <Contact />
+            <Location />
+          </>
+        ) : (
+          <ServicePage 
+            serviceName={selectedService} 
+            onBack={() => { 
+              navigateToHome(); 
+              setTimeout(() => document.getElementById('hero')?.scrollIntoView(), 100); 
+            }} 
+          />
+        )}
       </main>
-
 
       <Footer />
       <Chatbot />

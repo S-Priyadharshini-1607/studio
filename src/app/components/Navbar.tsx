@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
+import logoImg from '../../assets/logo.jpeg';
+
 interface NavbarProps {
   darkMode: boolean;
   toggleDarkMode: () => void;
@@ -10,6 +12,7 @@ interface NavbarProps {
 export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,30 +54,60 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className={`text-2xl font-bold transition-colors min-w-[150px] ${
+            className={`flex items-center gap-2 text-2xl font-bold transition-colors min-w-[150px] ${
               isScrolled ? 'text-rose-600' : 'text-white'
             }`}
           >
-            FocusStudio
+            <img src={logoImg} alt="FocusStudio Logo" className="w-10 h-10 rounded-full object-cover" />
+            <span>FocusStudio</span>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex flex-1 justify-center items-center gap-8">
             {navLinks.map((link, index) => (
-              <motion.button
-                key={link.id}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-                onClick={() => scrollToSection(link.id)}
-                className={`transition-colors font-bold tracking-wider uppercase text-xs ${
-                  isScrolled 
-                    ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600' 
-                    : 'text-white hover:text-blue-200'
-                }`}
-              >
-                {link.name}
-              </motion.button>
+              <div key={link.id} className="relative">
+                <motion.button
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  onClick={() => {
+                    if (link.id === 'services') {
+                      setIsServicesOpen(!isServicesOpen);
+                    } else {
+                      scrollToSection(link.id);
+                      setIsServicesOpen(false);
+                    }
+                  }}
+                  className={`transition-colors font-bold tracking-wider uppercase text-xs flex items-center gap-1 ${
+                    isScrolled 
+                      ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600' 
+                      : 'text-white hover:text-blue-200'
+                  }`}
+                >
+                  {link.name}
+                </motion.button>
+                {link.id === 'services' && isServicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute top-full mt-4 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 rounded-xl shadow-xl py-2 w-48 overflow-hidden"
+                  >
+                    {['Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots', 'Baby Shower', 'Newborn Shoot', 'Candid Photography', 'School Function', 'College Functions'].map((service) => (
+                      <button
+                        key={service}
+                        onClick={() => {
+                          scrollToSection('services');
+                          setIsServicesOpen(false);
+                        }}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-amber-50 hover:text-amber-600 dark:hover:bg-gray-700 transition-colors"
+                      >
+                        {service}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
             ))}
           </div>
 
@@ -134,13 +167,38 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
               className="md:hidden mt-4 pb-4"
             >
               {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className="block w-full text-left py-3 text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-bold uppercase text-sm tracking-wide border-b border-gray-100 dark:border-gray-800 last:border-0"
-                >
-                  {link.name}
-                </button>
+                <div key={link.id}>
+                  <button
+                    onClick={() => {
+                      if (link.id === 'services') {
+                        setIsServicesOpen(!isServicesOpen);
+                      } else {
+                        scrollToSection(link.id);
+                        setIsServicesOpen(false);
+                      }
+                    }}
+                    className="flex justify-between items-center w-full text-left py-3 text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-bold uppercase text-sm tracking-wide border-b border-gray-100 dark:border-gray-800 last:border-0"
+                  >
+                    {link.name}
+                  </button>
+                  {link.id === 'services' && isServicesOpen && (
+                    <div className="pl-4 py-2 flex flex-col gap-3 border-b border-gray-100 dark:border-gray-800">
+                      {['Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots'].map((service) => (
+                        <button
+                          key={service}
+                          onClick={() => {
+                            scrollToSection('services');
+                            setIsServicesOpen(false);
+                            setIsMobileMenuOpen(false);
+                          }}
+                          className="text-left text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-amber-600"
+                        >
+                          {service}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
 
               <button
