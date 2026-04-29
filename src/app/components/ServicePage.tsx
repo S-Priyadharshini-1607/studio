@@ -106,7 +106,7 @@ const serviceData: Record<string, { title: string; description: string; images: 
       'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=800&auto=format&fit=crop'
     ]
   },
-  'College Functions': {
+  'College Function': {
     title: 'College Event Photography',
     description: 'Fests, farewells, graduations, and alumni meets. We document the high-energy and unforgettable moments of college life.',
     images: [

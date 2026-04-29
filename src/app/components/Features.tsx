@@ -52,7 +52,7 @@ const mainServices = [
     image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop'
   },
   {
-    name: 'College Functions',
+    name: 'College Function',
     color: 'from-red-400 to-rose-600',
     image: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=600&auto=format&fit=crop'
   }

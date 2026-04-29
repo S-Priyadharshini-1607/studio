@@ -7,9 +7,18 @@ import logoImg from '../../assets/logo.jpeg';
 interface NavbarProps {
   darkMode: boolean;
   toggleDarkMode: () => void;
+  onNavigateService: (service: string) => void;
+  onNavigateHome: () => void;
+  currentPage: 'home' | 'service';
 }
 
-export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
+export default function Navbar({ 
+  darkMode, 
+  toggleDarkMode, 
+  onNavigateService, 
+  onNavigateHome, 
+  currentPage 
+}: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -70,7 +79,8 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className={`flex items-center gap-2 text-2xl font-bold transition-colors min-w-[150px] ${
+            onClick={onNavigateHome}
+            className={`flex items-center gap-2 text-2xl font-bold transition-colors min-w-[150px] cursor-pointer ${
               isScrolled ? 'text-rose-600' : 'text-white'
             }`}
           >
@@ -89,6 +99,8 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
                   onClick={() => {
                     if (link.id === 'services') {
                       setIsServicesOpen(!isServicesOpen);
+                    } else if (link.id === 'hero') {
+                      onNavigateHome();
                     } else {
                       scrollToSection(link.id);
                       setIsServicesOpen(false);
@@ -109,11 +121,11 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
                     exit={{ opacity: 0, y: 10 }}
                     className="absolute top-full mt-4 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 rounded-xl shadow-xl py-2 w-48 overflow-hidden"
                   >
-                    {['Wedding', 'Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots', 'Baby Shower', 'Newborn Shoot', 'Candid Photography', 'School Function', 'College Functions'].map((service) => (
+                    {['Wedding', 'Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots', 'Baby Shower', 'Newborn Shoot', 'Candid Photography', 'School Function', 'College Function'].map((service) => (
                       <button
                         key={service}
                         onClick={() => {
-                          scrollToSection('services');
+                          onNavigateService(service);
                           setIsServicesOpen(false);
                         }}
                         className="block w-full text-left px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-amber-50 hover:text-amber-600 dark:hover:bg-gray-700 transition-colors"
@@ -199,11 +211,11 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
                   </button>
                   {link.id === 'services' && isServicesOpen && (
                     <div className="pl-4 py-2 flex flex-col gap-3 border-b border-gray-100 dark:border-gray-800">
-                      {['Wedding', 'Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots'].map((service) => (
+                      {['Wedding', 'Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots', 'Baby Shower', 'Newborn Shoot', 'Candid Photography', 'School Function', 'College Function'].map((service) => (
                         <button
                           key={service}
                           onClick={() => {
-                            scrollToSection('services');
+                            onNavigateService(service);
                             setIsServicesOpen(false);
                             setIsMobileMenuOpen(false);
                           }}
