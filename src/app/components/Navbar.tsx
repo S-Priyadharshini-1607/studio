@@ -8,7 +8,7 @@ interface NavbarProps {
   darkMode: boolean;
   toggleDarkMode: () => void;
   onNavigateService: (service: string) => void;
-  onNavigateHome: () => void;
+  onNavigateHome: (section?: string) => void;
   currentPage: 'home' | 'service';
 }
 
@@ -79,7 +79,7 @@ export default function Navbar({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            onClick={onNavigateHome}
+            onClick={() => onNavigateHome(currentPage === 'service' ? 'services' : 'hero')}
             className={`flex items-center gap-2 text-2xl font-bold transition-colors min-w-[150px] cursor-pointer ${
               isScrolled ? 'text-rose-600' : 'text-white'
             }`}

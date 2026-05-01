@@ -208,7 +208,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           />
 
           {/* Pricing / Booking Call to Action */}
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className={`grid ${serviceName === 'Wedding' ? 'md:grid-cols-2' : 'grid-cols-1'} gap-8`}>
             <div className="bg-rose-50 dark:bg-gray-700/50 p-10 rounded-3xl">
               <h3 className="text-2xl font-bold mb-6">What's Included</h3>
               <ul className="space-y-4 text-gray-700 dark:text-gray-300">
@@ -231,18 +231,20 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
               </ul>
             </div>
             
-            <div className="flex flex-col justify-center items-center bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 p-10 rounded-3xl text-center">
-              <h3 className="text-3xl font-bold mb-4">Book Your Session</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg max-w-md">
-                Ready to create some magic? Get in touch with us to schedule your {serviceName.toLowerCase()} session.
-              </p>
-              <button 
-                onClick={onBack}
-                className="px-10 py-4 bg-amber-600 text-white rounded-full font-bold hover:bg-amber-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
-              >
-                Contact Us Now
-              </button>
-            </div>
+            {serviceName === 'Wedding' && (
+              <div className="flex flex-col justify-center items-center bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 p-10 rounded-3xl text-center">
+                <h3 className="text-3xl font-bold mb-4">Book Your Session</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg max-w-md">
+                  Ready to create some magic? Get in touch with us to schedule your {serviceName.toLowerCase()} session.
+                </p>
+                <button 
+                  onClick={onBack}
+                  className="px-10 py-4 bg-amber-600 text-white rounded-full font-bold hover:bg-amber-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+                >
+                  Contact Us Now
+                </button>
+              </div>
+            )}
           </div>
         </motion.div>
       </div>

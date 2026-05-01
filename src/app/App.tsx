@@ -26,10 +26,16 @@ export default function App() {
     window.scrollTo(0, 0);
   };
 
-  const navigateToHome = () => {
+  const navigateToHome = (section = 'hero') => {
     setCurrentPage('home');
     window.history.pushState({ page: 'home' }, '', '/');
-    window.scrollTo(0, 0);
+    if (section === 'hero') {
+      window.scrollTo(0, 0);
+    } else {
+      setTimeout(() => {
+        document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
   };
 
   useEffect(() => {
@@ -104,8 +110,7 @@ export default function App() {
           <ServicePage 
             serviceName={selectedService} 
             onBack={() => { 
-              navigateToHome(); 
-              setTimeout(() => document.getElementById('hero')?.scrollIntoView(), 100); 
+              navigateToHome('services'); 
             }} 
           />
         )}
