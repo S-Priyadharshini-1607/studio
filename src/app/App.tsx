@@ -22,18 +22,28 @@ export default function App() {
   const navigateToService = (service: string) => {
     setSelectedService(service);
     setCurrentPage('service');
-    window.history.pushState({ page: 'service', service }, '', `#${service}`);
+    // Use hash for service pages
+    if (window.location.hash !== `#${service}`) {
+      window.history.pushState({ page: 'service', service }, '', `#${service}`);
+    }
     window.scrollTo(0, 0);
   };
 
   const navigateToHome = (section = 'hero') => {
     setCurrentPage('home');
-    window.history.pushState({ page: 'home' }, '', '/');
+    // Clear hash for home
+    if (window.location.hash || window.location.pathname !== '/') {
+      window.history.pushState({ page: 'home' }, '', '/');
+    }
+    
     if (section === 'hero') {
       window.scrollTo(0, 0);
     } else {
       setTimeout(() => {
-        document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+        const element = document.getElementById(section);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }, 100);
     }
   };
@@ -45,13 +55,20 @@ export default function App() {
         setSelectedService(state.service);
         setCurrentPage('service');
       } else {
-        setCurrentPage('home');
+        // If no state, check hash as fallback
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+          setSelectedService(hash);
+          setCurrentPage('service');
+        } else {
+          setCurrentPage('home');
+        }
       }
     };
 
     window.addEventListener('popstate', handlePopState);
     
-    // Handle initial state if user refreshes on a service
+    // Handle initial state
     const hash = window.location.hash.replace('#', '');
     if (hash) {
       setSelectedService(hash);

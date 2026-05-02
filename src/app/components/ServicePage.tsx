@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { Lightbox } from './ui/Lightbox';
 
 // Import Prewedding Images
@@ -198,17 +198,8 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
             </div>
           </div>
 
-          <Lightbox 
-            isOpen={lightboxOpen}
-            onClose={() => setLightboxOpen(false)}
-            images={data.images}
-            currentIndex={currentIndex}
-            onPrev={() => setCurrentIndex((prev) => (prev - 1 + data.images.length) % data.images.length)}
-            onNext={() => setCurrentIndex((prev) => (prev + 1) % data.images.length)}
-          />
-
           {/* Pricing / Booking Call to Action */}
-          <div className={`grid ${serviceName === 'Wedding' ? 'md:grid-cols-2' : 'grid-cols-1'} gap-8`}>
+          <div className={`grid ${serviceName === 'Wedding' ? 'md:grid-cols-2' : 'grid-cols-1'} gap-8 mt-12`}>
             <div className="bg-rose-50 dark:bg-gray-700/50 p-10 rounded-3xl">
               <h3 className="text-2xl font-bold mb-6">What's Included</h3>
               <ul className="space-y-4 text-gray-700 dark:text-gray-300">
@@ -247,6 +238,15 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
             )}
           </div>
         </motion.div>
+
+        <Lightbox 
+          isOpen={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          images={data.images}
+          currentIndex={currentIndex}
+          onPrev={() => setCurrentIndex((prev) => (prev - 1 + data.images.length) % data.images.length)}
+          onNext={() => setCurrentIndex((prev) => (prev + 1) % data.images.length)}
+        />
       </div>
     </div>
   );
