@@ -171,11 +171,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
               : "grid md:grid-cols-3 gap-6"}>
               {data.images.map((img, idx) => {
                 let spanClass = "";
-                if (serviceName === 'Prewedding') {
-                  if (idx === 0) spanClass = "md:col-span-2 md:row-span-2";
-                  else if (idx === 7) spanClass = "md:col-span-2 md:row-span-2";
-                  else spanClass = "md:col-span-1 md:row-span-1";
-                } else if (serviceName === 'Wedding') {
+                if (serviceName === 'Prewedding' || serviceName === 'Wedding') {
                   if (idx === 0) spanClass = "md:col-span-4 md:row-span-2";
                   else if (idx === 1) spanClass = "md:col-span-2 md:row-span-2";
                   else if (idx === 4) spanClass = "md:col-span-2 md:row-span-2";
