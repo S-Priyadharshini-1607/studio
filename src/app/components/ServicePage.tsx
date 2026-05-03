@@ -60,15 +60,42 @@ const serviceData: Record<string, { title: string; description: string; images: 
     title: 'Postwedding Celebrations',
     description: 'The stress of the wedding is over, and now it is just about you two. Relaxed, beautiful, and intimate post-wedding sessions to celebrate your new chapter.',
     images: [
-      'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1544078755-9a849788f8d5?q=80&w=800&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800&auto=format&fit=crop', // 1
+      'https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop', // 2
+      'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop', // 3 (wide)
+      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop', // 4
+      'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800&auto=format&fit=crop', // 5
+      'https://images.unsplash.com/photo-1493770348161-369560ae357d?q=80&w=800&auto=format&fit=crop', // 6
+      'https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=800&auto=format&fit=crop', // 7
+      'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', // 8 (Full Width)
+      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop', // 9
+      'https://images.unsplash.com/photo-1550586678-f7225f03c44b?q=80&w=800&auto=format&fit=crop', // 10
+      'https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?q=80&w=800&auto=format&fit=crop', // 11 (Tall)
+      'https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=800&auto=format&fit=crop', // 12
+      'https://images.unsplash.com/photo-1504113133342-7484726797ed?q=80&w=800&auto=format&fit=crop', // 13 (Wide)
+      'https://images.unsplash.com/photo-1473093226795-af9932fe5856?q=80&w=800&auto=format&fit=crop'  // 14
     ]
   },
   'Engagement': {
     title: 'Engagement Sessions',
     description: 'The moment she says yes, captured forever. From surprise proposals to stylized engagement shoots, we ensure every detail of this milestone is documented.',
-    images: [eng1, eng2, eng3, eng4, eng5, eng6, eng7, eng8]
+    images: [
+      'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop', // 1
+      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop', // 2
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop', // 3
+      'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800&auto=format&fit=crop', // 4 (Banner)
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop', // 5
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop', // 6
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=800&auto=format&fit=crop', // 7
+      'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop', // 8
+      'https://images.unsplash.com/photo-1503104834685-7205e8607eb9?q=80&w=800&auto=format&fit=crop', // 9 (Large Left)
+      'https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?q=80&w=800&auto=format&fit=crop', // 10
+      'https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=800&auto=format&fit=crop', // 11
+      'https://images.unsplash.com/photo-1523264629844-40dd6bf17c2b?q=80&w=800&auto=format&fit=crop', // 12
+      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop', // 13 (Large Right)
+      'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?q=80&w=800&auto=format&fit=crop', // 14
+      'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=800&auto=format&fit=crop'  // 15
+    ]
   },
   'Birthday Shoots': {
     title: 'Birthday & Event Shoots',
@@ -166,8 +193,8 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           {/* Sample Gallery Section */}
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-8 text-center">Sample Gallery</h2>
-            <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement') 
-              ? "grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]" 
+            <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement' || serviceName === 'Postwedding') 
+              ? `grid grid-cols-1 ${serviceName === 'Engagement' ? 'md:grid-cols-6' : 'md:grid-cols-4'} gap-4 auto-rows-[250px]` 
               : "grid md:grid-cols-3 gap-6"}>
               {data.images.map((img, idx) => {
                 let spanClass = "";
@@ -178,16 +205,40 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                   else if (idx === 9) spanClass = "md:col-span-2 md:row-span-1";
                   else spanClass = "md:col-span-1 md:row-span-1";
                 } else if (serviceName === 'Engagement') {
-                  // Custom layout based on the provided image
-                  if (idx === 0) spanClass = "md:col-span-1 md:row-span-1"; // Top Left
-                  else if (idx === 1) spanClass = "md:col-span-2 md:row-span-1"; // Top Middle (wide)
-                  else if (idx === 2) spanClass = "md:col-span-1 md:row-span-1"; // Top Right
-                  else if (idx === 3) spanClass = "md:col-span-2 md:row-span-2 rounded-full z-10 -ml-12"; // Circle
-                  else if (idx === 4) spanClass = "md:col-span-1 md:row-span-1"; // Middle small
-                  else if (idx === 5) spanClass = "md:col-span-1 md:row-span-2"; // Right Large
-                  else if (idx === 6) spanClass = "md:col-span-2 md:row-span-1"; // Bottom Middle
-                  else if (idx === 7) spanClass = "md:col-span-1 md:row-span-1"; // Bottom Left
-                  else spanClass = "aspect-[4/5]";
+                  // Complex Collage Layout from "Class of 2026" screenshot (6-column grid)
+                  if (idx === 0) spanClass = "md:col-span-2 md:row-span-2"; // Top 1
+                  else if (idx === 1) spanClass = "md:col-span-2 md:row-span-2"; // Top 2
+                  else if (idx === 2) spanClass = "md:col-span-2 md:row-span-2"; // Top 3
+                  else if (idx === 3) spanClass = "md:col-span-6 md:row-span-2"; // Banner
+                  else if (idx === 4) spanClass = "md:col-span-1 md:row-span-1"; // Small row 1
+                  else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // Small row 2
+                  else if (idx === 6) spanClass = "md:col-span-2 md:row-span-1 bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-4 text-center text-sm italic"; // Text Block slot
+                  else if (idx === 7) spanClass = "md:col-span-1 md:row-span-1"; // Small row 3
+                  else if (idx === 8) spanClass = "md:col-span-1 md:row-span-1"; // Small row 4
+                  else if (idx === 9) spanClass = "md:col-span-3 md:row-span-3"; // Large Left
+                  else if (idx === 10) spanClass = "md:col-span-1 md:row-span-1"; // Small row middle 1
+                  else if (idx === 11) spanClass = "md:col-span-1 md:row-span-1"; // Small row middle 2
+                  else if (idx === 12) spanClass = "md:col-span-1 md:row-span-1"; // Small row middle 3
+                  else if (idx === 13) spanClass = "md:col-span-3 md:row-span-3"; // Large Right
+                  else if (idx === 14) spanClass = "md:col-span-1 md:row-span-1"; // Small row bottom 1
+                  else spanClass = "md:col-span-1 md:row-span-1";
+                } else if (serviceName === 'Postwedding') {
+                  // Complex Mosaic Layout from screenshot
+                  if (idx === 0) spanClass = "md:col-span-1 md:row-span-1"; // 1
+                  else if (idx === 1) spanClass = "md:col-span-1 md:row-span-1"; // 2
+                  else if (idx === 2) spanClass = "md:col-span-2 md:row-span-1"; // 3 (wide)
+                  else if (idx === 3) spanClass = "md:col-span-1 md:row-span-1"; // 4
+                  else if (idx === 4) spanClass = "md:col-span-1 md:row-span-1"; // 5
+                  else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // 6
+                  else if (idx === 6) spanClass = "md:col-span-1 md:row-span-1"; // 7
+                  else if (idx === 7) spanClass = "md:col-span-4 md:row-span-2"; // 8 (Full Width)
+                  else if (idx === 8) spanClass = "md:col-span-1 md:row-span-1"; // 9
+                  else if (idx === 9) spanClass = "md:col-span-1 md:row-span-1"; // 10
+                  else if (idx === 10) spanClass = "md:col-span-1 md:row-span-2"; // 11 (Tall)
+                  else if (idx === 11) spanClass = "md:col-span-1 md:row-span-1"; // 12
+                  else if (idx === 12) spanClass = "md:col-span-2 md:row-span-1"; // 13 (Wide)
+                  else if (idx === 13) spanClass = "md:col-span-1 md:row-span-1"; // 14
+                  else spanClass = "md:col-span-1 md:row-span-1";
                 } else {
                   spanClass = "aspect-[4/5]";
                 }
