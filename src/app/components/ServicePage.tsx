@@ -27,6 +27,19 @@ import wed8 from '../../assets/wedding/009A8547.JPG.jpeg';
 import wed9 from '../../assets/wedding/009A8548.JPG.jpeg';
 import wed10 from '../../assets/wedding/009A8556.JPG.jpeg';
 
+// Import Engagement Images
+import eng1 from '../../assets/engagement/1.avif';
+import eng2 from '../../assets/engagement/2.jpg';
+import eng3 from '../../assets/engagement/3.jpg';
+import eng4 from '../../assets/engagement/4.jpg';
+import eng5 from '../../assets/engagement/5.jpeg';
+import eng6 from '../../assets/engagement/6.jpg';
+import eng7 from '../../assets/engagement/7.jpg';
+import eng8 from '../../assets/engagement/8.avif';
+
+
+
+
 interface ServicePageProps {
   serviceName: string;
   onBack: () => void;
@@ -55,11 +68,7 @@ const serviceData: Record<string, { title: string; description: string; images: 
   'Engagement': {
     title: 'Engagement Sessions',
     description: 'The moment she says yes, captured forever. From surprise proposals to stylized engagement shoots, we ensure every detail of this milestone is documented.',
-    images: [
-      'https://images.unsplash.com/photo-1515543169302-35804576d165?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1533158097560-64299b9ed9ee?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1596484552834-6a58f850d0a1?q=80&w=800&auto=format&fit=crop'
-    ]
+    images: [eng1, eng2, eng3, eng4, eng5, eng6, eng7, eng8]
   },
   'Birthday Shoots': {
     title: 'Birthday & Event Shoots',
@@ -157,7 +166,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           {/* Sample Gallery Section */}
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-8 text-center">Sample Gallery</h2>
-            <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding') 
+            <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement') 
               ? "grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]" 
               : "grid md:grid-cols-3 gap-6"}>
               {data.images.map((img, idx) => {
@@ -172,6 +181,17 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                   else if (idx === 4) spanClass = "md:col-span-2 md:row-span-2";
                   else if (idx === 9) spanClass = "md:col-span-2 md:row-span-1";
                   else spanClass = "md:col-span-1 md:row-span-1";
+                } else if (serviceName === 'Engagement') {
+                  // Custom layout based on the provided image
+                  if (idx === 0) spanClass = "md:col-span-1 md:row-span-1"; // Top Left
+                  else if (idx === 1) spanClass = "md:col-span-2 md:row-span-1"; // Top Middle (wide)
+                  else if (idx === 2) spanClass = "md:col-span-1 md:row-span-1"; // Top Right
+                  else if (idx === 3) spanClass = "md:col-span-2 md:row-span-2 rounded-full z-10 -ml-12"; // Circle
+                  else if (idx === 4) spanClass = "md:col-span-1 md:row-span-1"; // Middle small
+                  else if (idx === 5) spanClass = "md:col-span-1 md:row-span-2"; // Right Large
+                  else if (idx === 6) spanClass = "md:col-span-2 md:row-span-1"; // Bottom Middle
+                  else if (idx === 7) spanClass = "md:col-span-1 md:row-span-1"; // Bottom Left
+                  else spanClass = "aspect-[4/5]";
                 } else {
                   spanClass = "aspect-[4/5]";
                 }
@@ -184,7 +204,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                     viewport={{ once: true }}
                     transition={{ delay: 0.05 * idx }}
                     onClick={() => openLightbox(idx)}
-                    className={`rounded-2xl overflow-hidden shadow-lg group relative cursor-pointer ${spanClass}`}
+                    className={`rounded-2xl overflow-hidden shadow-lg group relative cursor-pointer ${spanClass} ${serviceName === 'Engagement' && idx === 3 ? 'border-8 border-white dark:border-gray-800 shadow-2xl' : ''}`}
                   >
                     <img 
                       src={img} 
