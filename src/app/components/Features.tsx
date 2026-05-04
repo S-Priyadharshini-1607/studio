@@ -27,7 +27,7 @@ const mainServices = [
     image: 'https://images.unsplash.com/photo-1515543169302-35804576d165?q=80&w=600&auto=format&fit=crop'
   },
   {
-    name: 'Birthday Shoots',
+    name: 'Birthday',
     color: 'from-orange-500 to-amber-500',
     image: 'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=600&auto=format&fit=crop'
   },

@@ -2,7 +2,7 @@ import { Heart, Mail, MapPin, Phone, PhoneCall } from 'lucide-react';
 
 export default function Footer() {
   const footerLinks = {
-    Services: ['Prewedding', 'Postwedding', 'Engagement', 'Birthday Shoots'],
+    Services: ['Prewedding', 'Postwedding', 'Engagement', 'Birthday'],
     Company: ['About Us', 'Portfolio', 'Blog', 'Contact'],
     Resources: ['Pricing Guide', 'FAQ', 'Client Gallery', 'Testimonials'],
     Legal: ['Privacy Policy', 'Terms of Service', 'Copyright', 'License'],

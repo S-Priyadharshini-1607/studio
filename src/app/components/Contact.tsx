@@ -116,7 +116,7 @@ export default function Contact() {
                 <option value="Prewedding">Prewedding</option>
                 <option value="Postwedding">Postwedding</option>
                 <option value="Engagement">Engagement</option>
-                <option value="Birthday Shoots">Birthday Shoots</option>
+                <option value="Birthday">Birthday</option>
               </select>
             </div>
 

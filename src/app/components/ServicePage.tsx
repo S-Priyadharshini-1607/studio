@@ -37,6 +37,15 @@ import eng6 from '../../assets/engagement/6.jpg';
 import eng7 from '../../assets/engagement/7.jpg';
 import eng8 from '../../assets/engagement/8.avif';
 
+// Import Birthday Images
+import birth1 from '../../assets/birthday/1.jpg';
+import birth2 from '../../assets/birthday/2.jpg';
+import birth3 from '../../assets/birthday/4.jpg';
+import birth4 from '../../assets/birthday/5.jpg';
+import birth5 from '../../assets/birthday/6.jpg';
+import birth6 from '../../assets/birthday/7.jpg';
+
+
 
 
 
@@ -97,14 +106,10 @@ const serviceData: Record<string, { title: string; description: string; images: 
       'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=800&auto=format&fit=crop'  // 15
     ]
   },
-  'Birthday Shoots': {
+  'Birthday': {
     title: 'Birthday & Event Shoots',
     description: 'Celebrate another trip around the sun with a fun, vibrant birthday photoshoot. Whether it is a sweet sixteen or a milestone 50th, we bring the energy and creativity.',
-    images: [
-      'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=800&auto=format&fit=crop'
-    ]
+    images: [birth1, birth2, birth3, birth4, birth5, birth6, birth1]
   },
   'Baby Shower': {
     title: 'Baby Shower Photography',
@@ -194,8 +199,10 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-8 text-center">Sample Gallery</h2>
             <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement' || serviceName === 'Postwedding') 
-              ? `grid grid-cols-1 ${serviceName === 'Engagement' ? 'md:grid-cols-6' : 'md:grid-cols-4'} gap-4 auto-rows-[250px]` 
-              : "grid md:grid-cols-3 gap-6"}>
+              ? `grid grid-cols-1 ${serviceName === 'Engagement' ? 'md:grid-cols-6' : (serviceName === 'Birthday' ? 'md:grid-cols-6' : 'md:grid-cols-4')} gap-4 auto-rows-[250px]` 
+              : (serviceName === 'Birthday')
+                ? "grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[200px]"
+                : "grid md:grid-cols-2 lg:grid-cols-3 gap-6"}>
               {data.images.map((img, idx) => {
                 let spanClass = "";
                 if (serviceName === 'Prewedding' || serviceName === 'Wedding') {
@@ -239,6 +246,16 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                   else if (idx === 12) spanClass = "md:col-span-2 md:row-span-1"; // 13 (Wide)
                   else if (idx === 13) spanClass = "md:col-span-1 md:row-span-1"; // 14
                   else spanClass = "md:col-span-1 md:row-span-1";
+                } else if (serviceName === 'Birthday') {
+                  // Custom 6-column layout based on the provided black/white grid image
+                  if (idx === 0) spanClass = "md:col-span-2 md:row-span-2"; // Top Left Square
+                  else if (idx === 1) spanClass = "md:col-span-1 md:row-span-2"; // Top Middle Thin
+                  else if (idx === 2) spanClass = "md:col-span-3 md:row-span-1"; // Top Right Wide
+                  else if (idx === 3) spanClass = "md:col-span-1 md:row-span-2"; // Bottom Left Thin
+                  else if (idx === 4) spanClass = "md:col-span-2 md:row-span-2"; // Bottom Middle Square
+                  else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // Middle Right Small
+                  else if (idx === 6) spanClass = "md:col-span-2 md:row-span-1"; // Middle Right Medium
+                  else spanClass = "aspect-square";
                 } else {
                   spanClass = "aspect-[4/5]";
                 }
