@@ -199,7 +199,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-8 text-center">Sample Gallery</h2>
             <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement' || serviceName === 'Postwedding') 
-              ? `grid grid-cols-1 ${serviceName === 'Engagement' ? 'md:grid-cols-6' : (serviceName === 'Birthday' ? 'md:grid-cols-6' : 'md:grid-cols-4')} gap-4 auto-rows-[250px]` 
+              ? `grid grid-cols-1 ${serviceName === 'Engagement' ? 'md:grid-cols-6' : 'md:grid-cols-4'} gap-4 auto-rows-[250px]` 
               : (serviceName === 'Birthday')
                 ? "grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[200px]"
                 : "grid md:grid-cols-2 lg:grid-cols-3 gap-6"}>
