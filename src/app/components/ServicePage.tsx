@@ -88,32 +88,12 @@ const serviceData: Record<string, { title: string; description: string; images: 
   'Engagement': {
     title: 'Engagement Sessions',
     description: 'The moment she says yes, captured forever. From surprise proposals to stylized engagement shoots, we ensure every detail of this milestone is documented.',
-    images: [
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop', // 1
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop', // 2
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop', // 3
-      'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800&auto=format&fit=crop', // 4 (Banner)
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop', // 5
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop', // 6
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=800&auto=format&fit=crop', // 7
-      'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop', // 8
-      'https://images.unsplash.com/photo-1503104834685-7205e8607eb9?q=80&w=800&auto=format&fit=crop', // 9 (Large Left)
-      'https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?q=80&w=800&auto=format&fit=crop', // 10
-      'https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=800&auto=format&fit=crop', // 11
-      'https://images.unsplash.com/photo-1523264629844-40dd6bf17c2b?q=80&w=800&auto=format&fit=crop', // 12
-      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop', // 13 (Large Right)
-      'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?q=80&w=800&auto=format&fit=crop', // 14
-      'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=800&auto=format&fit=crop'  // 15
-    ]
+    images: [eng1, eng2, eng3, eng5, eng4, eng6, eng7, eng8]
   },
   'Birthday': {
     title: 'Birthday & Event Shoots',
     description: 'Celebrate another trip around the sun with a fun, vibrant birthday photoshoot. Whether it is a sweet sixteen or a milestone 50th, we bring the energy and creativity.',
-    images: [
-      'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=800&auto=format&fit=crop'
-    ]
+    images: [birth1, birth2, birth3, birth6, birth5, birth4]
   },
   'Baby Shower': {
     title: 'Baby Shower Photography',
@@ -266,9 +246,9 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
             ) : (
               <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement' || serviceName === 'Postwedding' || serviceName === 'Birthday Shoots' || serviceName === 'Baby Shower' || serviceName === 'Candid Photography')
                 ? `grid grid-cols-1 ${(serviceName === 'Engagement' || serviceName === 'Candid Photography') ? 'md:grid-cols-6' : 'md:grid-cols-4'} gap-4 auto-rows-[250px]`
-                : (serviceName === 'Birthday')
-                  ? "grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[200px]"
-                  : "grid md:grid-cols-2 lg:grid-cols-3 gap-6"}>
+                  : (serviceName === 'Birthday')
+                    ? "grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[180px]"
+                    : "grid md:grid-cols-2 lg:grid-cols-3 gap-6"}>
                 {data.images.map((img, idx) => {
                   let spanClass = "";
                   if (serviceName === 'Prewedding' || serviceName === 'Wedding') {
@@ -313,18 +293,18 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                     else if (idx === 13) spanClass = "md:col-span-1 md:row-span-1"; // 14
                     else spanClass = "md:col-span-1 md:row-span-1";
                   } else if (serviceName === 'Birthday') {
-                    // Custom 6-column layout based on the provided black/white grid image
-                    if (idx === 0) spanClass = "md:col-span-2 md:row-span-2"; // Top Left Square
-                    else if (idx === 1) spanClass = "md:col-span-1 md:row-span-2"; // Top Middle Thin
-                    else if (idx === 2) spanClass = "md:col-span-3 md:row-span-1"; // Top Right Wide
-                    else if (idx === 3) spanClass = "md:col-span-1 md:row-span-2"; // Bottom Left Thin
-                    else if (idx === 4) spanClass = "md:col-span-2 md:row-span-2"; // Bottom Middle Square
-                    else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // Middle Right Small
-                    else if (idx === 6) spanClass = "md:col-span-2 md:row-span-1"; // Middle Right Medium
+                    // Specific 7-slot zig-zag layout requested by user
+                    if (idx === 0) spanClass = "md:col-span-3 md:row-span-3"; // Large Left
+                    else if (idx === 1) spanClass = "md:col-span-2 md:row-span-1"; // Top Row Wide
+                    else if (idx === 2) spanClass = "md:col-span-1 md:row-span-1"; // Top Row Small
+                    else if (idx === 3) spanClass = "md:col-span-1 md:row-span-1"; // Middle Row Small
+                    else if (idx === 4) spanClass = "md:col-span-2 md:row-span-1"; // Middle Row Wide
+                    else if (idx === 5) spanClass = "md:col-span-3 md:row-span-1"; // Bottom Row Full Width
                     else spanClass = "aspect-square";
                   } else {
                     spanClass = "aspect-[4/5]";
                   }
+
 
                   return (
                     <motion.div
