@@ -109,15 +109,41 @@ const serviceData: Record<string, { title: string; description: string; images: 
   'Birthday': {
     title: 'Birthday & Event Shoots',
     description: 'Celebrate another trip around the sun with a fun, vibrant birthday photoshoot. Whether it is a sweet sixteen or a milestone 50th, we bring the energy and creativity.',
-    images: [birth1, birth2, birth3, birth4, birth5, birth6, birth1]
+    images: [
+      'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=800&auto=format&fit=crop', // 1
+      'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?q=80&w=800&auto=format&fit=crop', // 2
+      'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=800&auto=format&fit=crop', // 3 (wide)
+      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800&auto=format&fit=crop', // 4
+      'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=800&auto=format&fit=crop', // 5
+      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=800&auto=format&fit=crop', // 6
+      'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=800&auto=format&fit=crop', // 7
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop', // 8 (Full Width)
+      'https://images.unsplash.com/photo-1514525253344-f21ce0bb71d6?q=80&w=800&auto=format&fit=crop', // 9
+      'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80&w=800&auto=format&fit=crop', // 10
+      'https://images.unsplash.com/photo-1516600164264-fc6be013689b?q=80&w=800&auto=format&fit=crop', // 11 (Tall)
+      'https://images.unsplash.com/photo-1472653816316-3ad6f10a6592?q=80&w=800&auto=format&fit=crop', // 12
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop', // 13 (Wide)
+      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800&auto=format&fit=crop'  // 14
+    ]
   },
   'Baby Shower': {
     title: 'Baby Shower Photography',
     description: 'Celebrate the upcoming arrival of your little one with beautiful, glowing portraits and joyous event coverage with family and friends.',
     images: [
-      'https://images.unsplash.com/photo-1555243896-c709bfa0b564?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1555243896-c709bfa0b564?q=80&w=800&auto=format&fit=crop', // 1
+      'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop', // 2
+      'https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=800&auto=format&fit=crop', // 3 (wide)
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop', // 4
+      'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop', // 5
+      'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', // 6
+      'https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=800&auto=format&fit=crop', // 7
+      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop', // 8 (Full Width)
+      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=800&auto=format&fit=crop', // 9
+      'https://images.unsplash.com/photo-1550586678-f7225f03c44b?q=80&w=800&auto=format&fit=crop', // 10
+      'https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?q=80&w=800&auto=format&fit=crop', // 11 (Tall)
+      'https://images.unsplash.com/photo-1472653816316-3ad6f10a6592?q=80&w=800&auto=format&fit=crop', // 12
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop', // 13 (Wide)
+      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800&auto=format&fit=crop'  // 14
     ]
   },
   'Newborn Shoot': {
@@ -198,7 +224,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           {/* Sample Gallery Section */}
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-8 text-center">Sample Gallery</h2>
-            <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement' || serviceName === 'Postwedding') 
+            <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement' || serviceName === 'Postwedding' || serviceName === 'Birthday Shoots' || serviceName === 'Baby Shower') 
               ? `grid grid-cols-1 ${serviceName === 'Engagement' ? 'md:grid-cols-6' : 'md:grid-cols-4'} gap-4 auto-rows-[250px]` 
               : (serviceName === 'Birthday')
                 ? "grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[200px]"
@@ -229,7 +255,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                   else if (idx === 13) spanClass = "md:col-span-3 md:row-span-3"; // Large Right
                   else if (idx === 14) spanClass = "md:col-span-1 md:row-span-1"; // Small row bottom 1
                   else spanClass = "md:col-span-1 md:row-span-1";
-                } else if (serviceName === 'Postwedding') {
+                } else if (serviceName === 'Postwedding' || serviceName === 'Birthday Shoots' || serviceName === 'Baby Shower') {
                   // Complex Mosaic Layout from screenshot
                   if (idx === 0) spanClass = "md:col-span-1 md:row-span-1"; // 1
                   else if (idx === 1) spanClass = "md:col-span-1 md:row-span-1"; // 2
