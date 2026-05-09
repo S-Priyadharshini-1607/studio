@@ -10,12 +10,12 @@ import Chatbot from './components/Chatbot';
 import Contact from './components/Contact';
 import Location from './components/Location';
 import Footer from './components/Footer';
-import Loading from './components/Loading';
+
 import ServicePage from './components/ServicePage';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [showLoading, setShowLoading] = useState(true);
+
   const [currentPage, setCurrentPage] = useState<'home' | 'service'>('home');
   const [selectedService, setSelectedService] = useState('');
 
@@ -78,13 +78,6 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     if (darkMode) {
@@ -100,9 +93,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors">
-      <AnimatePresence>
-        {showLoading && <Loading />}
-      </AnimatePresence>
 
       <Navbar 
         darkMode={darkMode} 

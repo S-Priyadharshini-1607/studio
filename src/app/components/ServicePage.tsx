@@ -45,6 +45,22 @@ import birth4 from '../../assets/birthday/5.jpg';
 import birth5 from '../../assets/birthday/6.jpg';
 import birth6 from '../../assets/birthday/7.jpg';
 
+// Import Baby Shower Images
+import bs1 from '../../assets/baby_shower/bs1.jpg';
+import bs2 from '../../assets/baby_shower/bs2.jpg';
+import bs3 from '../../assets/baby_shower/bs3.webp';
+import bs4 from '../../assets/baby_shower/bs4.jpg';
+import bs5 from '../../assets/baby_shower/bs5.webp';
+import bs6 from '../../assets/baby_shower/bs6.jpg';
+import bs7 from '../../assets/baby_shower/bs7.jpg';
+import bs8 from '../../assets/baby_shower/bs8.jpg';
+import bs9 from '../../assets/baby_shower/bs9.jpg';
+import bs10 from '../../assets/baby_shower/bs10.jpg';
+import bs11 from '../../assets/baby_shower/bs11.jpg';
+import bs12 from '../../assets/baby_shower/bs12.jpg';
+import bs13 from '../../assets/baby_shower/bs13.jpg';
+import bs14 from '../../assets/baby_shower/bs14.jpg';
+
 
 
 
@@ -98,22 +114,7 @@ const serviceData: Record<string, { title: string; description: string; images: 
   'Baby Shower': {
     title: 'Baby Shower Photography',
     description: 'Celebrate the upcoming arrival of your little one with beautiful, glowing portraits and joyous event coverage with family and friends.',
-    images: [
-      'https://images.unsplash.com/photo-1555243896-c709bfa0b564?q=80&w=800&auto=format&fit=crop', // 1
-      'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop', // 2
-      'https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=800&auto=format&fit=crop', // 3 (wide)
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop', // 4
-      'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop', // 5
-      'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', // 6
-      'https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=800&auto=format&fit=crop', // 7
-      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop', // 8 (Full Width)
-      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=800&auto=format&fit=crop', // 9
-      'https://images.unsplash.com/photo-1550586678-f7225f03c44b?q=80&w=800&auto=format&fit=crop', // 10
-      'https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?q=80&w=800&auto=format&fit=crop', // 11 (Tall)
-      'https://images.unsplash.com/photo-1472653816316-3ad6f10a6592?q=80&w=800&auto=format&fit=crop', // 12
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop', // 13 (Wide)
-      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800&auto=format&fit=crop'  // 14
-    ]
+    images: [bs1, bs2, bs3, bs4, bs5, bs6, bs7, bs8, bs9, bs10, bs11, bs12, bs13, bs14]
   },
   'Newborn Shoot': {
     title: 'Newborn Photography',
