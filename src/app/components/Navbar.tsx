@@ -121,7 +121,7 @@ export default function Navbar({
                     exit={{ opacity: 0, y: 10 }}
                     className="absolute top-full mt-4 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 rounded-xl shadow-xl py-2 w-48 overflow-hidden"
                   >
-                    {['Wedding', 'Prewedding', 'Postwedding', 'Engagement', 'Birthday', 'Baby Shower', 'Newborn Shoot', 'Candid Photography', 'School Function', 'College Function'].map((service) => (
+                    {['Wedding', 'Prewedding', 'Postwedding', 'Engagement', 'Birthday', 'Baby Shower', 'Newborn Shoot', 'Candid Photography', 'School & College Function'].map((service) => (
                       <button
                         key={service}
                         onClick={() => {
@@ -211,7 +211,7 @@ export default function Navbar({
                   </button>
                   {link.id === 'services' && isServicesOpen && (
                     <div className="pl-4 py-2 flex flex-col gap-3 border-b border-gray-100 dark:border-gray-800">
-                      {['Wedding', 'Prewedding', 'Postwedding', 'Engagement', 'Birthday', 'Baby Shower', 'Newborn Shoot', 'Candid Photography', 'School Function', 'College Function'].map((service) => (
+                      {['Wedding', 'Prewedding', 'Postwedding', 'Engagement', 'Birthday', 'Baby Shower', 'Newborn Shoot', 'Candid Photography', 'School & College Function'].map((service) => (
                         <button
                           key={service}
                           onClick={() => {

@@ -110,20 +110,9 @@ const serviceData: Record<string, { title: string; description: string; images: 
     title: 'Birthday & Event Shoots',
     description: 'Celebrate another trip around the sun with a fun, vibrant birthday photoshoot. Whether it is a sweet sixteen or a milestone 50th, we bring the energy and creativity.',
     images: [
-      'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=800&auto=format&fit=crop', // 1
-      'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?q=80&w=800&auto=format&fit=crop', // 2
-      'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=800&auto=format&fit=crop', // 3 (wide)
-      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800&auto=format&fit=crop', // 4
-      'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=800&auto=format&fit=crop', // 5
-      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=800&auto=format&fit=crop', // 6
-      'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=800&auto=format&fit=crop', // 7
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop', // 8 (Full Width)
-      'https://images.unsplash.com/photo-1514525253344-f21ce0bb71d6?q=80&w=800&auto=format&fit=crop', // 9
-      'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80&w=800&auto=format&fit=crop', // 10
-      'https://images.unsplash.com/photo-1516600164264-fc6be013689b?q=80&w=800&auto=format&fit=crop', // 11 (Tall)
-      'https://images.unsplash.com/photo-1472653816316-3ad6f10a6592?q=80&w=800&auto=format&fit=crop', // 12
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop', // 13 (Wide)
-      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800&auto=format&fit=crop'  // 14
+      'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=800&auto=format&fit=crop'
     ]
   },
   'Baby Shower': {
@@ -152,7 +141,14 @@ const serviceData: Record<string, { title: string; description: string; images: 
     images: [
       'https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=800&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1555243896-c709bfa0b564?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1544078755-9a849788f8d5?q=80&w=800&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1544078755-9a849788f8d5?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1510154221590-ff63e90a136f?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1515488042361-404e9250af02?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop'
     ]
   },
   'Candid Photography': {
@@ -161,27 +157,33 @@ const serviceData: Record<string, { title: string; description: string; images: 
     images: [
       'https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=800&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1523264629844-40dd6bf17c2b?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1472653816316-3ad6f10a6592?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1551818255-e6e10975bc17?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=800&auto=format&fit=crop'
     ]
   },
-  'School Function': {
-    title: 'School Function Photography',
-    description: 'From annual days to sports events, we cover school functions with professional equipment to capture the bright smiles and talents of students.',
+  'School & College Function': {
+    title: 'School & College Functions',
+    description: 'From annual days to sports events, fests, and graduations. We cover school and college functions with professional equipment to capture the bright smiles and talents of students.',
     images: [
       'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=800&auto=format&fit=crop'
-    ]
-  },
-  'College Function': {
-    title: 'College Event Photography',
-    description: 'Fests, farewells, graduations, and alumni meets. We document the high-energy and unforgettable moments of college life.',
-    images: [
-      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=800&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=800&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1551818255-e6e10975bc17?q=80&w=800&auto=format&fit=crop'
     ]
-  }
+  },
+
 };
 
 export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
@@ -220,92 +222,131 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
               {data.description}
             </p>
           </div>
-          
+
           {/* Sample Gallery Section */}
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-8 text-center">Sample Gallery</h2>
-            <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement' || serviceName === 'Postwedding' || serviceName === 'Birthday Shoots' || serviceName === 'Baby Shower') 
-              ? `grid grid-cols-1 ${serviceName === 'Engagement' ? 'md:grid-cols-6' : 'md:grid-cols-4'} gap-4 auto-rows-[250px]` 
-              : (serviceName === 'Birthday')
-                ? "grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[200px]"
-                : "grid md:grid-cols-2 lg:grid-cols-3 gap-6"}>
-              {data.images.map((img, idx) => {
-                let spanClass = "";
-                if (serviceName === 'Prewedding' || serviceName === 'Wedding') {
-                  if (idx === 0) spanClass = "md:col-span-4 md:row-span-2";
-                  else if (idx === 1) spanClass = "md:col-span-2 md:row-span-2";
-                  else if (idx === 4) spanClass = "md:col-span-2 md:row-span-2";
-                  else if (idx === 9) spanClass = "md:col-span-2 md:row-span-1";
-                  else spanClass = "md:col-span-1 md:row-span-1";
-                } else if (serviceName === 'Engagement') {
-                  // Complex Collage Layout from "Class of 2026" screenshot (6-column grid)
-                  if (idx === 0) spanClass = "md:col-span-2 md:row-span-2"; // Top 1
-                  else if (idx === 1) spanClass = "md:col-span-2 md:row-span-2"; // Top 2
-                  else if (idx === 2) spanClass = "md:col-span-2 md:row-span-2"; // Top 3
-                  else if (idx === 3) spanClass = "md:col-span-6 md:row-span-2"; // Banner
-                  else if (idx === 4) spanClass = "md:col-span-1 md:row-span-1"; // Small row 1
-                  else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // Small row 2
-                  else if (idx === 6) spanClass = "md:col-span-2 md:row-span-1 bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-4 text-center text-sm italic"; // Text Block slot
-                  else if (idx === 7) spanClass = "md:col-span-1 md:row-span-1"; // Small row 3
-                  else if (idx === 8) spanClass = "md:col-span-1 md:row-span-1"; // Small row 4
-                  else if (idx === 9) spanClass = "md:col-span-3 md:row-span-3"; // Large Left
-                  else if (idx === 10) spanClass = "md:col-span-1 md:row-span-1"; // Small row middle 1
-                  else if (idx === 11) spanClass = "md:col-span-1 md:row-span-1"; // Small row middle 2
-                  else if (idx === 12) spanClass = "md:col-span-1 md:row-span-1"; // Small row middle 3
-                  else if (idx === 13) spanClass = "md:col-span-3 md:row-span-3"; // Large Right
-                  else if (idx === 14) spanClass = "md:col-span-1 md:row-span-1"; // Small row bottom 1
-                  else spanClass = "md:col-span-1 md:row-span-1";
-                } else if (serviceName === 'Postwedding' || serviceName === 'Birthday Shoots' || serviceName === 'Baby Shower') {
-                  // Complex Mosaic Layout from screenshot
-                  if (idx === 0) spanClass = "md:col-span-1 md:row-span-1"; // 1
-                  else if (idx === 1) spanClass = "md:col-span-1 md:row-span-1"; // 2
-                  else if (idx === 2) spanClass = "md:col-span-2 md:row-span-1"; // 3 (wide)
-                  else if (idx === 3) spanClass = "md:col-span-1 md:row-span-1"; // 4
-                  else if (idx === 4) spanClass = "md:col-span-1 md:row-span-1"; // 5
-                  else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // 6
-                  else if (idx === 6) spanClass = "md:col-span-1 md:row-span-1"; // 7
-                  else if (idx === 7) spanClass = "md:col-span-4 md:row-span-2"; // 8 (Full Width)
-                  else if (idx === 8) spanClass = "md:col-span-1 md:row-span-1"; // 9
-                  else if (idx === 9) spanClass = "md:col-span-1 md:row-span-1"; // 10
-                  else if (idx === 10) spanClass = "md:col-span-1 md:row-span-2"; // 11 (Tall)
-                  else if (idx === 11) spanClass = "md:col-span-1 md:row-span-1"; // 12
-                  else if (idx === 12) spanClass = "md:col-span-2 md:row-span-1"; // 13 (Wide)
-                  else if (idx === 13) spanClass = "md:col-span-1 md:row-span-1"; // 14
-                  else spanClass = "md:col-span-1 md:row-span-1";
-                } else if (serviceName === 'Birthday') {
-                  // Custom 6-column layout based on the provided black/white grid image
-                  if (idx === 0) spanClass = "md:col-span-2 md:row-span-2"; // Top Left Square
-                  else if (idx === 1) spanClass = "md:col-span-1 md:row-span-2"; // Top Middle Thin
-                  else if (idx === 2) spanClass = "md:col-span-3 md:row-span-1"; // Top Right Wide
-                  else if (idx === 3) spanClass = "md:col-span-1 md:row-span-2"; // Bottom Left Thin
-                  else if (idx === 4) spanClass = "md:col-span-2 md:row-span-2"; // Bottom Middle Square
-                  else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // Middle Right Small
-                  else if (idx === 6) spanClass = "md:col-span-2 md:row-span-1"; // Middle Right Medium
-                  else spanClass = "aspect-square";
-                } else {
-                  spanClass = "aspect-[4/5]";
-                }
+            {serviceName === 'Newborn Shoot' ? (
+              <div className="flex flex-col gap-10">
+                {/* Split images into chunks of 5 for multiple rows */}
+                {Array.from({ length: Math.ceil(data.images.length / 5) }, (_, i) => 
+                  data.images.slice(i * 5, i * 5 + 5)
+                ).map((rowImages, rowIndex) => (
+                  <div key={rowIndex} className="flex flex-col md:flex-row justify-center items-center -space-y-4 md:-space-y-0 md:-space-x-16 overflow-visible py-6 max-w-7xl mx-auto">
+                    {rowImages.map((img, idx) => {
+                      const globalIdx = rowIndex * 5 + idx;
+                      const rotation = idx % 2 === 0 ? "rotate-[-4deg]" : "rotate-[4deg]";
+                      const translation = idx % 2 === 0 ? "md:translate-y-[-15px]" : "md:translate-y-[15px]";
+                      
+                      return (
+                        <motion.div
+                          key={globalIdx}
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.1 * idx }}
+                          onClick={() => openLightbox(globalIdx)}
+                          className={`relative ${rotation} ${translation} transition-transform hover:scale-105 hover:z-10 cursor-pointer`}
+                        >
+                          {/* Tape at the top */}
+                          <div className="absolute top-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-6 bg-orange-300 opacity-75 z-20 shadow-sm"></div>
+                          
+                          {/* Photo frame */}
+                          <div className="bg-white dark:bg-gray-100 p-4 shadow-xl border border-gray-200 rounded-sm">
+                            <div className="w-64 h-80 overflow-hidden">
+                              <img src={img} alt={`${serviceName} sample ${globalIdx + 1}`} className="w-full h-full object-cover" />
+                            </div>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement' || serviceName === 'Postwedding' || serviceName === 'Birthday Shoots' || serviceName === 'Baby Shower' || serviceName === 'Candid Photography')
+                ? `grid grid-cols-1 ${(serviceName === 'Engagement' || serviceName === 'Candid Photography') ? 'md:grid-cols-6' : 'md:grid-cols-4'} gap-4 auto-rows-[250px]`
+                : (serviceName === 'Birthday')
+                  ? "grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[200px]"
+                  : "grid md:grid-cols-2 lg:grid-cols-3 gap-6"}>
+                {data.images.map((img, idx) => {
+                  let spanClass = "";
+                  if (serviceName === 'Prewedding' || serviceName === 'Wedding') {
+                    if (idx === 0) spanClass = "md:col-span-4 md:row-span-2";
+                    else if (idx === 1) spanClass = "md:col-span-2 md:row-span-2";
+                    else if (idx === 4) spanClass = "md:col-span-2 md:row-span-2";
+                    else if (idx === 9) spanClass = "md:col-span-2 md:row-span-1";
+                    else spanClass = "md:col-span-1 md:row-span-1";
+                  } else if (serviceName === 'Engagement' || serviceName === 'Candid Photography') {
+                    // Complex Collage Layout from "Class of 2026" screenshot (6-column grid)
+                    if (idx === 0) spanClass = "md:col-span-2 md:row-span-2"; // Top 1
+                    else if (idx === 1) spanClass = "md:col-span-2 md:row-span-2"; // Top 2
+                    else if (idx === 2) spanClass = "md:col-span-2 md:row-span-2"; // Top 3
+                    else if (idx === 3) spanClass = "md:col-span-6 md:row-span-2"; // Banner
+                    else if (idx === 4) spanClass = "md:col-span-1 md:row-span-1"; // Small row 1
+                    else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // Small row 2
+                    else if (idx === 6) spanClass = "md:col-span-2 md:row-span-1 bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-4 text-center text-sm italic"; // Text Block slot
+                    else if (idx === 7) spanClass = "md:col-span-1 md:row-span-1"; // Small row 3
+                    else if (idx === 8) spanClass = "md:col-span-1 md:row-span-1"; // Small row 4
+                    else if (idx === 9) spanClass = "md:col-span-3 md:row-span-3"; // Large Left
+                    else if (idx === 10) spanClass = "md:col-span-1 md:row-span-1"; // Small row middle 1
+                    else if (idx === 11) spanClass = "md:col-span-1 md:row-span-1"; // Small row middle 2
+                    else if (idx === 12) spanClass = "md:col-span-1 md:row-span-1"; // Small row middle 3
+                    else if (idx === 13) spanClass = "md:col-span-3 md:row-span-3"; // Large Right
+                    else if (idx === 14) spanClass = "md:col-span-1 md:row-span-1"; // Small row bottom 1
+                    else spanClass = "md:col-span-1 md:row-span-1";
+                  } else if (serviceName === 'Postwedding' || serviceName === 'Birthday Shoots' || serviceName === 'Baby Shower') {
+                    // Complex Mosaic Layout from screenshot
+                    if (idx === 0) spanClass = "md:col-span-1 md:row-span-1"; // 1
+                    else if (idx === 1) spanClass = "md:col-span-1 md:row-span-1"; // 2
+                    else if (idx === 2) spanClass = "md:col-span-2 md:row-span-1"; // 3 (wide)
+                    else if (idx === 3) spanClass = "md:col-span-1 md:row-span-1"; // 4
+                    else if (idx === 4) spanClass = "md:col-span-1 md:row-span-1"; // 5
+                    else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // 6
+                    else if (idx === 6) spanClass = "md:col-span-1 md:row-span-1"; // 7
+                    else if (idx === 7) spanClass = "md:col-span-4 md:row-span-2"; // 8 (Full Width)
+                    else if (idx === 8) spanClass = "md:col-span-1 md:row-span-1"; // 9
+                    else if (idx === 9) spanClass = "md:col-span-1 md:row-span-1"; // 10
+                    else if (idx === 10) spanClass = "md:col-span-1 md:row-span-2"; // 11 (Tall)
+                    else if (idx === 11) spanClass = "md:col-span-1 md:row-span-1"; // 12
+                    else if (idx === 12) spanClass = "md:col-span-2 md:row-span-1"; // 13 (Wide)
+                    else if (idx === 13) spanClass = "md:col-span-1 md:row-span-1"; // 14
+                    else spanClass = "md:col-span-1 md:row-span-1";
+                  } else if (serviceName === 'Birthday') {
+                    // Custom 6-column layout based on the provided black/white grid image
+                    if (idx === 0) spanClass = "md:col-span-2 md:row-span-2"; // Top Left Square
+                    else if (idx === 1) spanClass = "md:col-span-1 md:row-span-2"; // Top Middle Thin
+                    else if (idx === 2) spanClass = "md:col-span-3 md:row-span-1"; // Top Right Wide
+                    else if (idx === 3) spanClass = "md:col-span-1 md:row-span-2"; // Bottom Left Thin
+                    else if (idx === 4) spanClass = "md:col-span-2 md:row-span-2"; // Bottom Middle Square
+                    else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // Middle Right Small
+                    else if (idx === 6) spanClass = "md:col-span-2 md:row-span-1"; // Middle Right Medium
+                    else spanClass = "aspect-square";
+                  } else {
+                    spanClass = "aspect-[4/5]";
+                  }
 
-                return (
-                  <motion.div 
-                    key={idx}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.05 * idx }}
-                    onClick={() => openLightbox(idx)}
-                    className={`rounded-2xl overflow-hidden shadow-lg group relative cursor-pointer ${spanClass} ${serviceName === 'Engagement' && idx === 3 ? 'border-8 border-white dark:border-gray-800 shadow-2xl' : ''}`}
-                  >
-                    <img 
-                      src={img} 
-                      alt={`${serviceName} sample ${idx + 1}`} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </motion.div>
-                );
-              })}
-            </div>
+                  return (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.05 * idx }}
+                      onClick={() => openLightbox(idx)}
+                      className={`rounded-2xl overflow-hidden shadow-lg group relative cursor-pointer ${spanClass} ${serviceName === 'Engagement' && idx === 3 ? 'border-8 border-white dark:border-gray-800 shadow-2xl' : ''}`}
+                    >
+                      <img
+                        src={img}
+                        alt={`${serviceName} sample ${idx + 1}`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </motion.div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Pricing / Booking Call to Action */}
@@ -331,14 +372,14 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                 </li>
               </ul>
             </div>
-            
+
             {serviceName === 'Wedding' && (
               <div className="flex flex-col justify-center items-center bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 p-10 rounded-3xl text-center">
                 <h3 className="text-3xl font-bold mb-4">Book Your Session</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg max-w-md">
                   Ready to create some magic? Get in touch with us to schedule your {serviceName.toLowerCase()} session.
                 </p>
-                <button 
+                <button
                   onClick={onBack}
                   className="px-10 py-4 bg-amber-600 text-white rounded-full font-bold hover:bg-amber-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
                 >
@@ -349,7 +390,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           </div>
         </motion.div>
 
-        <Lightbox 
+        <Lightbox
           isOpen={lightboxOpen}
           onClose={() => setLightboxOpen(false)}
           images={data.images}
