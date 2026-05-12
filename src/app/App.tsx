@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation, Navigate, useParams } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -10,74 +11,22 @@ import Chatbot from './components/Chatbot';
 import Contact from './components/Contact';
 import Location from './components/Location';
 import Footer from './components/Footer';
-
 import ServicePage from './components/ServicePage';
+
+// Admin Components
+import Login from './pages/admin/Login';
+import Dashboard from './pages/admin/Dashboard';
+import UploadImage from './components/admin/UploadImage';
+import GalleryManager from './components/admin/GalleryManager';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [currentPage, setCurrentPage] = useState<'home' | 'service'>('home');
-  const [selectedService, setSelectedService] = useState('');
-
-  const navigateToService = (service: string) => {
-    setSelectedService(service);
-    setCurrentPage('service');
-    // Use hash for service pages
-    if (window.location.hash !== `#${service}`) {
-      window.history.pushState({ page: 'service', service }, '', `#${service}`);
-    }
-    window.scrollTo(0, 0);
-  };
-
-  const navigateToHome = (section = 'hero') => {
-    setCurrentPage('home');
-    // Clear hash for home
-    if (window.location.hash || window.location.pathname !== '/') {
-      window.history.pushState({ page: 'home' }, '', '/');
-    }
-    
-    if (section === 'hero') {
-      window.scrollTo(0, 0);
-    } else {
-      setTimeout(() => {
-        const element = document.getElementById(section);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    }
-  };
-
-  useEffect(() => {
-    const handlePopState = (event: PopStateEvent) => {
-      const state = event.state;
-      if (state && state.page === 'service') {
-        setSelectedService(state.service);
-        setCurrentPage('service');
-      } else {
-        // If no state, check hash as fallback
-        const hash = window.location.hash.replace('#', '');
-        if (hash) {
-          setSelectedService(hash);
-          setCurrentPage('service');
-        } else {
-          setCurrentPage('home');
-        }
-      }
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    
-    // Handle initial state
-    const hash = window.location.hash.replace('#', '');
-    if (hash) {
-      setSelectedService(hash);
-      setCurrentPage('service');
-    }
-
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
+  const isServicePage = location.pathname.startsWith('/service/');
+  const isAdminPage = ['/login', '/dashboard', '/upload', '/gallery-manager'].includes(location.pathname);
 
   useEffect(() => {
     if (darkMode) {
@@ -91,40 +40,89 @@ export default function App() {
     setDarkMode(!darkMode);
   };
 
+  const navigateToService = (service: string) => {
+    navigate(`/service/${service}`);
+    window.scrollTo(0, 0);
+  };
+
+  const navigateToHome = (section = 'hero') => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(section);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const element = document.getElementById(section);
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // If on a service page, the current page is 'service' for the navbar
+  const currentPage = isServicePage ? 'service' : 'home';
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors">
-
-      <Navbar 
-        darkMode={darkMode} 
-        toggleDarkMode={toggleDarkMode} 
-        onNavigateService={navigateToService}
-        onNavigateHome={navigateToHome}
-        currentPage={currentPage}
-      />
+      {!isAdminPage && (
+        <Navbar 
+          darkMode={darkMode} 
+          toggleDarkMode={toggleDarkMode} 
+          onNavigateService={navigateToService}
+          onNavigateHome={navigateToHome}
+          currentPage={currentPage}
+        />
+      )}
 
       <main>
-        {currentPage === 'home' ? (
-          <>
-            <Hero />
-            <About />
-            <Portfolio />
-            <Features onNavigateService={navigateToService} />
-            <VisualSection />
-            <Contact />
-            <Location />
-          </>
-        ) : (
-          <ServicePage 
-            serviceName={selectedService} 
-            onBack={() => { 
-              navigateToHome('services'); 
-            }} 
-          />
-        )}
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero />
+              <About />
+              <Portfolio />
+              <Features onNavigateService={navigateToService} />
+              <VisualSection />
+              <Contact />
+              <Location />
+            </>
+          } />
+          
+          <Route path="/service/:serviceName" element={<ServicePageWrapper onBack={() => navigateToHome('services')} />} />
+          
+          <Route path="/login" element={<Login />} />
+          
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/upload" element={
+            <ProtectedRoute>
+              <UploadImage />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/gallery-manager" element={
+            <ProtectedRoute>
+              <GalleryManager />
+            </ProtectedRoute>
+          } />
+
+          {/* Catch-all route to redirect back home */}
+          <Route path="/admin" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
-      <Footer />
-      <Chatbot />
+      {!isAdminPage && <Footer />}
+      {!isAdminPage && <Chatbot />}
     </div>
   );
 }
+
+// Helper component to extract params from URL for ServicePage
+function ServicePageWrapper({ onBack }: { onBack: () => void }) {
+  const { serviceName } = useParams();
+  return <ServicePage serviceName={serviceName || ''} onBack={onBack} />;
+}
