@@ -47,9 +47,6 @@ export default function Contact() {
             <h2 className="text-4xl md:text-5xl font-serif text-gray-900 mb-4">
               Send us a message
             </h2>
-            <p className="text-gray-600 leading-relaxed">
-              Get in touch with your customers to provide them with better service. You can modify the form fields to gather more precise information.
-            </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

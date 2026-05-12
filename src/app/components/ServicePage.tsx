@@ -204,9 +204,8 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
             </p>
           </div>
 
-          {/* Sample Gallery Section */}
+          {/* Gallery Section */}
           <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-8 text-center">Sample Gallery</h2>
             {serviceName === 'Newborn Shoot' ? (
               <div className="flex flex-col gap-10">
                 {/* Split images into chunks of 5 for multiple rows */}
