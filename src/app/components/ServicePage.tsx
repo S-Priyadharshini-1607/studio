@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchGalleryFromSheets, deleteSheetItem, uploadToCloudinary, syncWithGoogleSheets } from '../../lib/services';
+import { fetchGalleryFromSheets, deleteSheetItem, uploadToCloudinary, syncWithGoogleSheets, updateSheetItem } from '../../lib/services';
 import { toast } from 'sonner';
 import { useAuth } from '../../context/AuthContext';
 import InlineControls from './admin/InlineControls';
@@ -205,6 +205,28 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
     }
   };
 
+  const handleReplace = async (oldUrl: string) => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = async (e: any) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      toast.loading('Replacing...');
+      try {
+        const newUrl = await uploadToCloudinary(file);
+        await updateSheetItem(oldUrl, { url: newUrl });
+        setImages(images.map(img => img === oldUrl ? newUrl : img));
+        toast.dismiss();
+        toast.success('Replaced');
+      } catch (err) {
+        toast.dismiss();
+        toast.error('Failed');
+      }
+    };
+    input.click();
+  };
+
   const handleAdd = async () => {
     const input = document.createElement('input');
     input.type = 'file';
@@ -293,6 +315,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                           {user && (
                             <div className="absolute -top-4 -right-4 z-30 opacity-0 group-hover:opacity-100 transition-opacity">
                               <InlineControls 
+                                onReplace={() => handleReplace(img)}
                                 onDelete={() => handleDelete(img)}
                               />
                             </div>
@@ -388,6 +411,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                       {user && (
                         <div className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
                           <InlineControls 
+                            onReplace={() => handleReplace(img)}
                             onDelete={() => handleDelete(img)}
                           />
                         </div>

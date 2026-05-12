@@ -1,14 +1,15 @@
-import { Edit2, Trash2, Plus, GripVertical } from 'lucide-react';
+import { Edit2, Trash2, Plus, GripVertical, RefreshCcw } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface InlineControlsProps {
   onEdit?: () => void;
   onDelete?: () => void;
   onAdd?: () => void;
+  onReplace?: () => void;
   variant?: 'item' | 'section';
 }
 
-export default function InlineControls({ onEdit, onDelete, onAdd, variant = 'item' }: InlineControlsProps) {
+export default function InlineControls({ onEdit, onDelete, onAdd, onReplace, variant = 'item' }: InlineControlsProps) {
   return (
     <div className={`flex items-center gap-2 p-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md rounded-full shadow-xl border border-gray-100 dark:border-gray-800 pointer-events-auto ${variant === 'section' ? 'mb-4' : ''}`}>
       {variant === 'item' && (
@@ -24,6 +25,16 @@ export default function InlineControls({ onEdit, onDelete, onAdd, variant = 'ite
         >
           <Plus size={16} />
           <span className="text-xs font-bold uppercase tracking-wider">Add</span>
+        </button>
+      )}
+
+      {onReplace && (
+        <button 
+          onClick={(e) => { e.stopPropagation(); onReplace(); }}
+          className="p-2 text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-full transition-colors"
+          title="Replace Image"
+        >
+          <RefreshCcw size={16} />
         </button>
       )}
 
