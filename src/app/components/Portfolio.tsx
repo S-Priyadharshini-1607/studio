@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { fetchGalleryFromSheets, deleteSheetItem, uploadToCloudinary, syncWithGoogleSheets } from '../../lib/services';
+import { toast } from 'sonner';
+import { useAuth } from '../../context/AuthContext';
+import InlineControls from './admin/InlineControls';
 import { motion } from 'motion/react';
 import { useInView } from './hooks/useInView';
 import { ImageWithFallback } from './figma/ImageWithFallback';
@@ -117,18 +121,68 @@ const portfolioImages = [
   { url: bs7, alt: 'Celebration of Life' },
 ];
 
+
 export default function Portfolio() {
+  const { user } = useAuth();
+  const [images, setImages] = useState(portfolioImages);
   const [ref, isInView] = useInView({ threshold: 0.1 });
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    loadGallery();
+  }, []);
+
+  const loadGallery = async () => {
+    const data = await fetchGalleryFromSheets();
+    if (data && data.length > 0) {
+      setImages(data);
+    }
+  };
+
+  const handleDelete = async (url: string) => {
+    if (!window.confirm('Are you sure you want to delete this photo?')) return;
+    try {
+      await deleteSheetItem(url);
+      setImages(images.filter(img => img.url !== url));
+      toast.success('Deleted successfully');
+    } catch (err) {
+      toast.error('Failed to delete');
+    }
+  };
+
+  const handleAdd = async () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = async (e: any) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const title = prompt('Enter photo title:');
+      if (!title) return;
+      
+      toast.loading('Uploading...');
+      try {
+        const url = await uploadToCloudinary(file);
+        const newItem = { title, category: 'All', url };
+        await syncWithGoogleSheets(newItem);
+        setImages([...images, newItem]);
+        toast.dismiss();
+        toast.success('Uploaded successfully');
+      } catch (err) {
+        toast.dismiss();
+        toast.error('Upload failed');
+      }
+    };
+    input.click();
+  };
 
   const openLightbox = (index: number) => {
     setCurrentIndex(index);
     setLightboxOpen(true);
   };
 
-  const visibleImages = showAll ? portfolioImages : portfolioImages.slice(0, 8);
+  const visibleImages = showAll ? images : images.slice(0, 8);
 
   return (
     <section
@@ -141,14 +195,21 @@ export default function Portfolio() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 flex flex-col items-center"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Capture Your Moments
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6">
             A glimpse into the beautiful moments we've captured for couples around the world
           </p>
+          
+          {user && (
+            <InlineControls 
+              variant="section" 
+              onAdd={handleAdd} 
+            />
+          )}
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -162,6 +223,17 @@ export default function Portfolio() {
               onClick={() => openLightbox(index)}
               className="relative aspect-square overflow-hidden rounded-lg shadow-lg cursor-pointer group"
             >
+              {user && (
+                <div className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <InlineControls 
+                    onEdit={() => {
+                      const newTitle = prompt('Enter new title:', image.alt || image.title);
+                      if (newTitle) alert('Update logic would go here');
+                    }}
+                    onDelete={() => handleDelete(image.url)}
+                  />
+                </div>
+              )}
               <ImageWithFallback
                 src={image.url}
                 alt={image.alt}

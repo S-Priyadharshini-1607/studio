@@ -46,6 +46,38 @@ export const syncWithGoogleSheets = async (imageData: { title: string, category:
   }
 };
 
+export const deleteSheetItem = async (url: string) => {
+  try {
+    // SheetDB delete: DELETE /url/{value}
+    const response = await fetch(`${GOOGLE_SHEET_API}/url/${encodeURIComponent(url)}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) throw new Error('Failed to delete item');
+    return await response.json();
+  } catch (error) {
+    console.error('Error deleting from sheets:', error);
+    throw error;
+  }
+};
+
+export const updateSheetItem = async (oldUrl: string, newData: { title?: string, category?: string, url?: string }) => {
+  try {
+    // SheetDB update: PATCH /url/{value}
+    const response = await fetch(`${GOOGLE_SHEET_API}/url/${encodeURIComponent(oldUrl)}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data: [newData] }),
+    });
+    if (!response.ok) throw new Error('Failed to update item');
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating sheets:', error);
+    throw error;
+  }
+};
+
 export const fetchGalleryFromSheets = async () => {
   try {
     const response = await fetch(GOOGLE_SHEET_API);
@@ -53,6 +85,6 @@ export const fetchGalleryFromSheets = async () => {
     return await response.json();
   } catch (error) {
     console.error('Error fetching gallery:', error);
-    throw error;
+    return []; // Return empty array if fetch fails
   }
 };

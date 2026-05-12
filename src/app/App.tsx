@@ -15,9 +15,6 @@ import ServicePage from './components/ServicePage';
 
 // Admin Components
 import Login from './pages/admin/Login';
-import Dashboard from './pages/admin/Dashboard';
-import UploadImage from './components/admin/UploadImage';
-import GalleryManager from './components/admin/GalleryManager';
 import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
@@ -91,26 +88,7 @@ export default function App() {
           
           <Route path="/login" element={<Login />} />
           
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          } />
-          
-          <Route path="/upload" element={
-            <ProtectedRoute>
-              <UploadImage />
-            </ProtectedRoute>
-          } />
-          
-          <Route path="/gallery-manager" element={
-            <ProtectedRoute>
-              <GalleryManager />
-            </ProtectedRoute>
-          } />
-
           {/* Catch-all route to redirect back home */}
-          <Route path="/admin" element={<Navigate to="/dashboard" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

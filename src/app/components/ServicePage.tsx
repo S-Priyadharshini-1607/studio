@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { fetchGalleryFromSheets, deleteSheetItem, uploadToCloudinary, syncWithGoogleSheets } from '../../lib/services';
+import { toast } from 'sonner';
+import { useAuth } from '../../context/AuthContext';
+import InlineControls from './admin/InlineControls';
 import { motion } from 'motion/react';
 import { CheckCircle2 } from 'lucide-react';
 import { Lightbox } from './ui/Lightbox';
@@ -167,9 +171,61 @@ const serviceData: Record<string, { title: string; description: string; images: 
 
 };
 
+
 export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
+  const { user } = useAuth();
+  const [images, setImages] = useState<string[]>(serviceData[serviceName]?.images || []);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    loadCategoryImages();
+  }, [serviceName]);
+
+  const loadCategoryImages = async () => {
+    const allData = await fetchGalleryFromSheets();
+    if (allData && allData.length > 0) {
+      const filtered = allData
+        .filter((item: any) => item.category === serviceName)
+        .map((item: any) => item.url);
+      if (filtered.length > 0) {
+        setImages(filtered);
+      }
+    }
+  };
+
+  const handleDelete = async (url: string) => {
+    if (!window.confirm('Delete this image?')) return;
+    try {
+      await deleteSheetItem(url);
+      setImages(images.filter(img => img !== url));
+      toast.success('Deleted');
+    } catch (err) {
+      toast.error('Failed to delete');
+    }
+  };
+
+  const handleAdd = async () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = async (e: any) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      toast.loading('Uploading...');
+      try {
+        const url = await uploadToCloudinary(file);
+        await syncWithGoogleSheets({ title: serviceName, category: serviceName, url });
+        setImages([...images, url]);
+        toast.dismiss();
+        toast.success('Uploaded');
+      } catch (err) {
+        toast.dismiss();
+        toast.error('Failed');
+      }
+    };
+    input.click();
+  };
 
   const openLightbox = (index: number) => {
     setCurrentIndex(index);
@@ -195,13 +251,19 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white dark:bg-gray-800 rounded-[2.5rem] p-8 md:p-16 shadow-2xl overflow-hidden"
         >
-          <div className="text-center max-w-4xl mx-auto mb-16">
+          <div className="text-center max-w-4xl mx-auto mb-16 flex flex-col items-center">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
               {data.title}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
               {data.description}
             </p>
+            {user && (
+              <InlineControls 
+                variant="section" 
+                onAdd={handleAdd} 
+              />
+            )}
           </div>
 
           {/* Gallery Section */}
@@ -209,8 +271,8 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
             {serviceName === 'Newborn Shoot' ? (
               <div className="flex flex-col gap-10">
                 {/* Split images into chunks of 5 for multiple rows */}
-                {Array.from({ length: Math.ceil(data.images.length / 5) }, (_, i) => 
-                  data.images.slice(i * 5, i * 5 + 5)
+                {Array.from({ length: Math.ceil(images.length / 5) }, (_, i) => 
+                  images.slice(i * 5, i * 5 + 5)
                 ).map((rowImages, rowIndex) => (
                   <div key={rowIndex} className="flex flex-col md:flex-row justify-center items-center -space-y-4 md:-space-y-0 md:-space-x-16 overflow-visible py-6 max-w-7xl mx-auto">
                     {rowImages.map((img, idx) => {
@@ -226,8 +288,15 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                           viewport={{ once: true }}
                           transition={{ delay: 0.1 * idx }}
                           onClick={() => openLightbox(globalIdx)}
-                          className={`relative ${rotation} ${translation} transition-transform hover:scale-105 hover:z-10 cursor-pointer`}
+                          className={`relative ${rotation} ${translation} transition-transform hover:scale-105 hover:z-10 cursor-pointer group`}
                         >
+                          {user && (
+                            <div className="absolute -top-4 -right-4 z-30 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <InlineControls 
+                                onDelete={() => handleDelete(img)}
+                              />
+                            </div>
+                          )}
                           {/* Tape at the top */}
                           <div className="absolute top-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-6 bg-orange-300 opacity-75 z-20 shadow-sm"></div>
                           
@@ -249,7 +318,7 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                   : (serviceName === 'Birthday')
                     ? "grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[180px]"
                     : "grid md:grid-cols-2 lg:grid-cols-3 gap-6"}>
-                {data.images.map((img, idx) => {
+                {images.map((img, idx) => {
                   let spanClass = "";
                   if (serviceName === 'Prewedding' || serviceName === 'Wedding') {
                     if (idx === 0) spanClass = "md:col-span-4 md:row-span-2";
@@ -316,6 +385,13 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                       onClick={() => openLightbox(idx)}
                       className={`rounded-2xl overflow-hidden shadow-lg group relative cursor-pointer ${spanClass} ${serviceName === 'Engagement' && idx === 3 ? 'border-8 border-white dark:border-gray-800 shadow-2xl' : ''}`}
                     >
+                      {user && (
+                        <div className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <InlineControls 
+                            onDelete={() => handleDelete(img)}
+                          />
+                        </div>
+                      )}
                       <img
                         src={img}
                         alt={`${serviceName} sample ${idx + 1}`}
