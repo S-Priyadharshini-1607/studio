@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Moon, Sun } from 'lucide-react';
+import { Menu, X, Moon, Sun, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../lib/firebase';
 
 import logoImg from '../../assets/logo.jpeg';
 
@@ -19,10 +23,21 @@ export default function Navbar({
   onNavigateHome, 
   currentPage 
 }: NavbarProps) {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,11 +62,15 @@ export default function Navbar({
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+    if (currentPage !== 'home') {
+      onNavigateHome(id);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+    setIsMobileMenuOpen(false);
   };
 
   const navLinks = [
@@ -150,6 +169,27 @@ export default function Navbar({
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="px-6 py-2 bg-rose-600 text-white rounded-full hover:bg-rose-700 transition-colors flex items-center gap-2"
+              >
+                <LogOut size={16} />
+                Logout
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate('/login')}
+                className={`px-6 py-2 rounded-full transition-colors font-bold ${
+                  isScrolled 
+                    ? 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800' 
+                    : 'text-white hover:bg-white/10'
+                }`}
+              >
+                Admin
+              </button>
+            )}
 
             <motion.button
               initial={{ opacity: 0, scale: 0.8 }}

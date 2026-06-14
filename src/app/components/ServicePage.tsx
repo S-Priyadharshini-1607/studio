@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { fetchGalleryFromSheets, deleteSheetItem, uploadToCloudinary, syncWithGoogleSheets, updateSheetItem } from '../../lib/services';
+import { toast } from 'sonner';
+import { useAuth } from '../../context/AuthContext';
+import InlineControls from './admin/InlineControls';
 import { motion } from 'motion/react';
 import { CheckCircle2 } from 'lucide-react';
 import { Lightbox } from './ui/Lightbox';
@@ -45,6 +49,22 @@ import birth4 from '../../assets/birthday/5.jpg';
 import birth5 from '../../assets/birthday/6.jpg';
 import birth6 from '../../assets/birthday/7.jpg';
 
+// Import Baby Shower Images
+import bs1 from '../../assets/baby_shower/bs1.jpg';
+import bs2 from '../../assets/baby_shower/bs2.jpg';
+import bs3 from '../../assets/baby_shower/bs3.webp';
+import bs4 from '../../assets/baby_shower/bs4.jpg';
+import bs5 from '../../assets/baby_shower/bs5.webp';
+import bs6 from '../../assets/baby_shower/bs6.jpg';
+import bs7 from '../../assets/baby_shower/bs7.jpg';
+import bs8 from '../../assets/baby_shower/bs8.jpg';
+import bs9 from '../../assets/baby_shower/bs9.jpg';
+import bs10 from '../../assets/baby_shower/bs10.jpg';
+import bs11 from '../../assets/baby_shower/bs11.jpg';
+import bs12 from '../../assets/baby_shower/bs12.jpg';
+import bs13 from '../../assets/baby_shower/bs13.jpg';
+import bs14 from '../../assets/baby_shower/bs14.jpg';
+
 
 
 
@@ -88,52 +108,17 @@ const serviceData: Record<string, { title: string; description: string; images: 
   'Engagement': {
     title: 'Engagement Sessions',
     description: 'The moment she says yes, captured forever. From surprise proposals to stylized engagement shoots, we ensure every detail of this milestone is documented.',
-    images: [
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop', // 1
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop', // 2
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop', // 3
-      'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800&auto=format&fit=crop', // 4 (Banner)
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop', // 5
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop', // 6
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=800&auto=format&fit=crop', // 7
-      'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop', // 8
-      'https://images.unsplash.com/photo-1503104834685-7205e8607eb9?q=80&w=800&auto=format&fit=crop', // 9 (Large Left)
-      'https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?q=80&w=800&auto=format&fit=crop', // 10
-      'https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=800&auto=format&fit=crop', // 11
-      'https://images.unsplash.com/photo-1523264629844-40dd6bf17c2b?q=80&w=800&auto=format&fit=crop', // 12
-      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop', // 13 (Large Right)
-      'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?q=80&w=800&auto=format&fit=crop', // 14
-      'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=800&auto=format&fit=crop'  // 15
-    ]
+    images: [eng1, eng2, eng3, eng5, eng4, eng6, eng7, eng8]
   },
   'Birthday': {
     title: 'Birthday & Event Shoots',
     description: 'Celebrate another trip around the sun with a fun, vibrant birthday photoshoot. Whether it is a sweet sixteen or a milestone 50th, we bring the energy and creativity.',
-    images: [
-      'https://images.unsplash.com/photo-1530103862676-de889ca2bd91?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=800&auto=format&fit=crop'
-    ]
+    images: [birth1, birth2, birth3, birth6, birth5, birth4]
   },
   'Baby Shower': {
     title: 'Baby Shower Photography',
     description: 'Celebrate the upcoming arrival of your little one with beautiful, glowing portraits and joyous event coverage with family and friends.',
-    images: [
-      'https://images.unsplash.com/photo-1555243896-c709bfa0b564?q=80&w=800&auto=format&fit=crop', // 1
-      'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop', // 2
-      'https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=800&auto=format&fit=crop', // 3 (wide)
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop', // 4
-      'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop', // 5
-      'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', // 6
-      'https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=800&auto=format&fit=crop', // 7
-      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop', // 8 (Full Width)
-      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=800&auto=format&fit=crop', // 9
-      'https://images.unsplash.com/photo-1550586678-f7225f03c44b?q=80&w=800&auto=format&fit=crop', // 10
-      'https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?q=80&w=800&auto=format&fit=crop', // 11 (Tall)
-      'https://images.unsplash.com/photo-1472653816316-3ad6f10a6592?q=80&w=800&auto=format&fit=crop', // 12
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop', // 13 (Wide)
-      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800&auto=format&fit=crop'  // 14
-    ]
+    images: [bs1, bs2, bs3, bs4, bs5, bs6, bs7, bs8, bs9, bs10, bs11, bs12, bs13, bs14]
   },
   'Newborn Shoot': {
     title: 'Newborn Photography',
@@ -186,9 +171,83 @@ const serviceData: Record<string, { title: string; description: string; images: 
 
 };
 
+
 export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
+  const { user } = useAuth();
+  const [images, setImages] = useState<string[]>(serviceData[serviceName]?.images || []);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    loadCategoryImages();
+  }, [serviceName]);
+
+  const loadCategoryImages = async () => {
+    const allData = await fetchGalleryFromSheets();
+    if (allData && allData.length > 0) {
+      const filtered = allData
+        .filter((item: any) => item.category === serviceName)
+        .map((item: any) => item.url);
+      if (filtered.length > 0) {
+        setImages(filtered);
+      }
+    }
+  };
+
+  const handleDelete = async (url: string) => {
+    if (!window.confirm('Delete this image?')) return;
+    try {
+      await deleteSheetItem(url);
+      setImages(images.filter(img => img !== url));
+      toast.success('Deleted');
+    } catch (err) {
+      toast.error('Failed to delete');
+    }
+  };
+
+  const handleReplace = async (oldUrl: string) => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = async (e: any) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      toast.loading('Replacing...');
+      try {
+        const newUrl = await uploadToCloudinary(file);
+        await updateSheetItem(oldUrl, { url: newUrl });
+        setImages(images.map(img => img === oldUrl ? newUrl : img));
+        toast.dismiss();
+        toast.success('Replaced');
+      } catch (err) {
+        toast.dismiss();
+        toast.error('Failed');
+      }
+    };
+    input.click();
+  };
+
+  const handleAdd = async () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = async (e: any) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      toast.loading('Uploading...');
+      try {
+        const url = await uploadToCloudinary(file);
+        await syncWithGoogleSheets({ title: serviceName, category: serviceName, url });
+        setImages([...images, url]);
+        toast.dismiss();
+        toast.success('Uploaded');
+      } catch (err) {
+        toast.dismiss();
+        toast.error('Failed');
+      }
+    };
+    input.click();
+  };
 
   const openLightbox = (index: number) => {
     setCurrentIndex(index);
@@ -214,23 +273,28 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white dark:bg-gray-800 rounded-[2.5rem] p-8 md:p-16 shadow-2xl overflow-hidden"
         >
-          <div className="text-center max-w-4xl mx-auto mb-16">
+          <div className="text-center max-w-4xl mx-auto mb-16 flex flex-col items-center">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
               {data.title}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
               {data.description}
             </p>
+            {user && (
+              <InlineControls 
+                variant="section" 
+                onAdd={handleAdd} 
+              />
+            )}
           </div>
 
-          {/* Sample Gallery Section */}
+          {/* Gallery Section */}
           <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-8 text-center">Sample Gallery</h2>
             {serviceName === 'Newborn Shoot' ? (
               <div className="flex flex-col gap-10">
                 {/* Split images into chunks of 5 for multiple rows */}
-                {Array.from({ length: Math.ceil(data.images.length / 5) }, (_, i) => 
-                  data.images.slice(i * 5, i * 5 + 5)
+                {Array.from({ length: Math.ceil(images.length / 5) }, (_, i) => 
+                  images.slice(i * 5, i * 5 + 5)
                 ).map((rowImages, rowIndex) => (
                   <div key={rowIndex} className="flex flex-col md:flex-row justify-center items-center -space-y-4 md:-space-y-0 md:-space-x-16 overflow-visible py-6 max-w-7xl mx-auto">
                     {rowImages.map((img, idx) => {
@@ -246,8 +310,16 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                           viewport={{ once: true }}
                           transition={{ delay: 0.1 * idx }}
                           onClick={() => openLightbox(globalIdx)}
-                          className={`relative ${rotation} ${translation} transition-transform hover:scale-105 hover:z-10 cursor-pointer`}
+                          className={`relative ${rotation} ${translation} transition-transform hover:scale-105 hover:z-10 cursor-pointer group`}
                         >
+                          {user && (
+                            <div className="absolute -top-4 -right-4 z-30 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <InlineControls 
+                                onReplace={() => handleReplace(img)}
+                                onDelete={() => handleDelete(img)}
+                              />
+                            </div>
+                          )}
                           {/* Tape at the top */}
                           <div className="absolute top-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-6 bg-orange-300 opacity-75 z-20 shadow-sm"></div>
                           
@@ -266,10 +338,10 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
             ) : (
               <div className={(serviceName === 'Prewedding' || serviceName === 'Wedding' || serviceName === 'Engagement' || serviceName === 'Postwedding' || serviceName === 'Birthday Shoots' || serviceName === 'Baby Shower' || serviceName === 'Candid Photography')
                 ? `grid grid-cols-1 ${(serviceName === 'Engagement' || serviceName === 'Candid Photography') ? 'md:grid-cols-6' : 'md:grid-cols-4'} gap-4 auto-rows-[250px]`
-                : (serviceName === 'Birthday')
-                  ? "grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[200px]"
-                  : "grid md:grid-cols-2 lg:grid-cols-3 gap-6"}>
-                {data.images.map((img, idx) => {
+                  : (serviceName === 'Birthday')
+                    ? "grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[180px]"
+                    : "grid md:grid-cols-2 lg:grid-cols-3 gap-6"}>
+                {images.map((img, idx) => {
                   let spanClass = "";
                   if (serviceName === 'Prewedding' || serviceName === 'Wedding') {
                     if (idx === 0) spanClass = "md:col-span-4 md:row-span-2";
@@ -313,18 +385,18 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                     else if (idx === 13) spanClass = "md:col-span-1 md:row-span-1"; // 14
                     else spanClass = "md:col-span-1 md:row-span-1";
                   } else if (serviceName === 'Birthday') {
-                    // Custom 6-column layout based on the provided black/white grid image
-                    if (idx === 0) spanClass = "md:col-span-2 md:row-span-2"; // Top Left Square
-                    else if (idx === 1) spanClass = "md:col-span-1 md:row-span-2"; // Top Middle Thin
-                    else if (idx === 2) spanClass = "md:col-span-3 md:row-span-1"; // Top Right Wide
-                    else if (idx === 3) spanClass = "md:col-span-1 md:row-span-2"; // Bottom Left Thin
-                    else if (idx === 4) spanClass = "md:col-span-2 md:row-span-2"; // Bottom Middle Square
-                    else if (idx === 5) spanClass = "md:col-span-1 md:row-span-1"; // Middle Right Small
-                    else if (idx === 6) spanClass = "md:col-span-2 md:row-span-1"; // Middle Right Medium
+                    // Specific 7-slot zig-zag layout requested by user
+                    if (idx === 0) spanClass = "md:col-span-3 md:row-span-3"; // Large Left
+                    else if (idx === 1) spanClass = "md:col-span-2 md:row-span-1"; // Top Row Wide
+                    else if (idx === 2) spanClass = "md:col-span-1 md:row-span-1"; // Top Row Small
+                    else if (idx === 3) spanClass = "md:col-span-1 md:row-span-1"; // Middle Row Small
+                    else if (idx === 4) spanClass = "md:col-span-2 md:row-span-1"; // Middle Row Wide
+                    else if (idx === 5) spanClass = "md:col-span-3 md:row-span-1"; // Bottom Row Full Width
                     else spanClass = "aspect-square";
                   } else {
                     spanClass = "aspect-[4/5]";
                   }
+
 
                   return (
                     <motion.div
@@ -336,6 +408,14 @@ export default function ServicePage({ serviceName, onBack }: ServicePageProps) {
                       onClick={() => openLightbox(idx)}
                       className={`rounded-2xl overflow-hidden shadow-lg group relative cursor-pointer ${spanClass} ${serviceName === 'Engagement' && idx === 3 ? 'border-8 border-white dark:border-gray-800 shadow-2xl' : ''}`}
                     >
+                      {user && (
+                        <div className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <InlineControls 
+                            onReplace={() => handleReplace(img)}
+                            onDelete={() => handleDelete(img)}
+                          />
+                        </div>
+                      )}
                       <img
                         src={img}
                         alt={`${serviceName} sample ${idx + 1}`}
