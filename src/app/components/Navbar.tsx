@@ -89,7 +89,7 @@ export default function Navbar({
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex flex-1 justify-center items-center gap-8">
+          <div className="hidden lg:flex flex-1 justify-center items-center gap-8">
             {navLinks.map((link, index) => (
               <div key={link.id} className="relative">
                 <motion.button
@@ -139,7 +139,7 @@ export default function Navbar({
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-4 min-w-[200px] justify-end">
+          <div className="hidden lg:flex items-center gap-4 min-w-[200px] justify-end">
             <button
               onClick={toggleDarkMode}
               className={`p-3 rounded-full transition-colors ${
@@ -164,7 +164,7 @@ export default function Navbar({
 
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="lg:hidden flex items-center gap-4">
             <button
               onClick={toggleDarkMode}
               className={`p-2 rounded-full transition-colors ${
@@ -192,7 +192,7 @@ export default function Navbar({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 pb-4"
+              className="lg:hidden mt-4 pb-4"
             >
               {navLinks.map((link) => (
                 <div key={link.id}>
